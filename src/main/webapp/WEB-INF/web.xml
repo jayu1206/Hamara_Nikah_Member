@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+  <display-name>Archetype Created Web Application</display-name>
+  
+   <listener>
+    <listener-class>com.softNice.nikah.listner.listenerClass</listener-class>
+  </listener>
+  
+  <servlet>
+  	<servlet-name>loginServlet</servlet-name>
+  	<servlet-class>com.softNice.nikah.servlet.loginServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ContentServlet</servlet-name>
+  	<servlet-class>com.softNice.nikah.servlet.ContentServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>FormServlet</servlet-name>
+  	<servlet-class>com.softNice.nikah.servlet.FormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>loginServlet</servlet-name>
+  	<url-pattern>/loginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ContentServlet</servlet-name>
+  	<url-pattern>/ContentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>FormServlet</servlet-name>
+  	<url-pattern>/FormServlet</url-pattern>
+  </servlet-mapping>
+  
+
+  <servlet>
+    <display-name>DWRServlet</display-name>
+    <servlet-name>dwr-invoker</servlet-name>
+    <servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
+    <init-param>
+      <param-name>debug</param-name>
+      <param-value>true</param-value>
+    </init-param>
+	<init-param>
+      <param-name>activeReverseAjaxEnabled</param-name>
+      <param-value>true</param-value>
+    </init-param> 
+  </servlet>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>memberServlet</display-name>
+  	<servlet-name>memberServlet</servlet-name>
+  	<servlet-class>com.softNice.nikah.servlet.memberServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>UploadMaterial</display-name>
+  	<servlet-name>UploadMaterial</servlet-name>
+  	<servlet-class>com.softNice.nikah.servlet.UploadMaterial</servlet-class>
+  </servlet> 
+  
+    <servlet-mapping>
+    <servlet-name>dwr-invoker</servlet-name>
+    <url-pattern>/dwr/*</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>memberServlet</servlet-name>
+    	<url-pattern>/memberServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>UploadMaterial</servlet-name>
+    	<url-pattern>/UploadMaterial</url-pattern>
+    </servlet-mapping>
+  
+  
+  <error-page>
+  	<error-code>403</error-code>
+  	<location>/403-error.jsp</location>
+  </error-page>
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/404-error.jsp</location>
+  </error-page>
+  <error-page>
+  	<error-code>400</error-code>
+  	<location>/error.jsp</location>
+  </error-page>
+  <error-page>
+  	<error-code>500</error-code>
+  	<location>/500-error.jsp</location>
+  </error-page>
+  <error-page>
+  	<error-code>204</error-code>
+  	<location>/204-error.jsp</location>
+  </error-page>
+  
+  
+   <welcome-file-list>
+    <welcome-file>MemberLogin.jsp</welcome-file>
+  </welcome-file-list>
+  
+</web-app>
