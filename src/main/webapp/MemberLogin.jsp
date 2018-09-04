@@ -62,6 +62,14 @@
 				String firstName="",lastName="",gender="",dob="",email="",psw="",maritalStatus="";
 				int country=0,state=0,city=0;
 	
+				 String str="";
+				
+				
+				
+				
+				
+				
+				
 				settingBean settingbean= null;
 				generalSettingBean mailbean= new generalSettingBean();
 				if(getServletContext().getAttribute(contentPage.SETTING)!=null){
@@ -91,6 +99,16 @@
 					 email=request.getParameter("txtEmail");
 					 psw=request.getParameter("txtPsw");
 					 maritalStatus = request.getParameter("maritalStatus");
+					 
+					
+					str=((ErrorMsg)request.getAttribute(contentPage.ERROR)).getError();
+					if(str.equals("User created sucessfully")){
+					
+						firstName="" ;lastName="";gender="";dob="";email="";psw="";maritalStatus="";
+						country=0;state=0;city=0;
+					}
+						
+						
 					
 				}
 				
@@ -279,11 +297,15 @@
                                 
                                 	<div align="center" style="color: red">
 														<%
-														 String str="";
+														  str="";
 														if(request.getAttribute(contentPage.ERROR)!=null){ 
 															str=((ErrorMsg)request.getAttribute(contentPage.ERROR)).getError();
+															
+														} 
 														
-														} %>
+														
+														
+														%>
 														
 														<label><%=str %> </label>
 									
