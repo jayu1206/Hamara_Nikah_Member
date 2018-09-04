@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ page isELIgnored="true" %>
 <%@page import="com.softNice.nikah.maintenance.adminMaintenance"%>
 <%@page import="com.softNice.nikah.beans.countryBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -9,9 +10,6 @@
 <%@page import="com.softNice.nikah.constent.contentPage"%>
 <%@page import="com.softNice.nikah.constent.ErrorMsg"%>
 <%@page import="com.softNice.nikah.beans.memberStoryBean"%>
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <html lang="en">
     <head>
         <!-- HTML Variables -->
@@ -33,21 +31,28 @@
         <link href="memberCSS/css/style.css" rel="stylesheet" type="text/css"/>
         
         
-        <script src="assets/js/jquery-1.11.3.min.js"></script>
+       
 
-		<meta name="description" content="User login page" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-
-
+<!-- 		
+ 		<link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" /> 
+		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" /> 
+		 <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css" />
+		  -->
+		  
+        <script type='text/javascript' src='dwr/engine.js'></script>
+		<script type='text/javascript' src='dwr/interface/softNiceUtilityData.js'></script>
+		<script type='text/javascript' src='dwr/util.js'></script>
+		<script src='js/softnice.js?v=" + Date.now() + "' type="text/javascript" charset="utf-8"></script>
 		
-		
+	
 		
         <!-- SEO -->
         <meta name="description" content="" />
-        <title>Login Page - Hamara Nikah</title>
+        <title>Hamara Nikah</title>
     </head>
     
-    <%
+     <%
     
     
     
@@ -98,11 +103,12 @@
 		%>
 		
 		
+		
     <body>
         <!-- Header Starts  -->
         <header class="header">
             <div class="container">
-                <div class="top-header" style="padding: 0 0;">
+                <div class="top-header">
                     <div class="top-left float-left">
                         <a href="tel:01987654321"><i class="fa fa-phone"></i><span>01-987654321</span></a>
                         <a href="mailto:info@hamaranikah.com"><i class="fa fa-envelope"></i><span>info@hamaranikah.com</span> </a>
@@ -121,23 +127,23 @@
                                 <img src="memberCSS/images/logo.png" alt="logo"/>
                             </a>
                         </div>
-                       
-	                        <div class="col-lg-7">
-	                            <div class="login-form">
-	                                 <form action="memberServlet" method="post" name="memberForm1" id="memberForm1" >
-	                                    <div class="form-group">
-	                                        <input type="email" class="form-control" placeholder="Email"  id="txtUserName" name="txtUserName"  />
-	                                    </div>
-	                                    <input type="hidden" id="key" name="key" value="" />
-	                                    <div class="form-group">
-	                                        <input type="password" class="form-control" placeholder="Password"  id="txtPsw" name="txtPsw"  />
-	                                        <a href="javascript:;">Forgot your Password?</a>
-	                                    </div>
-	                                    <input type="submit" class="btn" value="login"  id="btnSubmit"  name="btnSubmit" />
-	                                   
-	                                </form>
-	                            </div>
-	                        </div>
+                        <div class="col-lg-7">
+                            <div class="login-form">
+                                <form action="memberServlet" method="post" name="memberForm1" id="memberForm1" class="float-none float-lg-right" >
+                                <input type="hidden" id="key" name="key" value="" />
+                                    <div class="form-group">
+                                        <!-- <input type="email" class="form-control" placeholder="Email"/> -->
+                                        <input type="email" class="form-control" placeholder="Email"  id="txtUserName" name="txtUserName"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <!-- <input type="password" class="form-control" placeholder="Password"/> -->
+                                        <input type="password" class="form-control" placeholder="Password"  id="txtPsw" name="txtPsw"  />
+                                        <a href="javascript:;">Forgot your Password?</a>
+                                    </div>
+                                    <input type="submit" class="btn" value="login" id="btnSubmit"  name="btnSubmit" />
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -150,18 +156,17 @@
                             <h2>Perfect Place for your Perfect Matchs</h2>
                             <form action="memberServlet?key=newRegister" method="post" name="memberForm2" id="memberForm2">
                                 <h1>Registration FREE</h1>
-                                <div class="form-group">
+                                 <div class="form-group">
                                     <label class="form-label">First Name</label>
                                     <input type="text" id="txtFirstName" name="txtFirstName" class="form-control" value="<%=firstName %>" placeholder="First Name" />
-                                </div>
+                                </div> 
                                 
-                                 <div class="form-group">
+                               <div class="form-group">
                                     <label class="form-label">Last Name</label>
                                     <input type="text" id="txtLastName" name="txtLastName" class="form-control" value="<%=lastName %>" placeholder="Last Name" />
                                 </div>
                                 
-                                
-                                <div class="radio-block">
+                                  <div class="radio-block">
                                     <label class="form-label">I am looking for</label>
                                     <label class="radio inline"> 
                                         <%if(gender.equalsIgnoreCase("male")){ %>
@@ -181,13 +186,13 @@
                                     </label>
                                 </div>
                                 
-                                 <div class="form-group">
+                              <%--    <div class="form-group">
                                     <label class="form-label">Date of birth</label>
                                     <input class="input-medium date-picker"  id="txtDob" name="txtDob" value="<%=dob %>" type="text" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy"  readonly="readonly" />
 									<i class="ace-icon fa fa-calendar"></i>
-                                </div>
+                                </div> --%>
                                 
-                                <div class="form-group">
+                                  <div class="form-group">
                                     <label class="form-label">Country</label>
                                     <select class="form-control" id="country" name="country" onchange="getState(this.value,0);">
 												<option value="0">Country</option>
@@ -202,7 +207,8 @@
 										</select>
                                 </div>
                                 
-                                <div class="form-group">
+                                
+                                 <div class="form-group">
                                     <label class="form-label">State</label>
                                    <select class="form-control"  id="state" name="state" onchange="getCity(this.value,0);">
 											<option value="0">State</option>
@@ -216,69 +222,72 @@
 								  </select>
                                 </div>
                                 
-                                <div class="form-group">
+                               <div class="form-group">
                                     <label class="form-label">Email</label>
                                     <input type="text" id="txtEmail" name="txtEmail" value="<%=email %>" class="form-control" placeholder="Email" />
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Marital Status</label>
                                     <select class="form-control" id="maritalStatus" name="maritalStatus" >
+                                    <option   value="0">Marital Status</option>
                                     <%if(maritalStatus.equalsIgnoreCase("Single")){ %>
+                                    		<option value="Single" selected="selected">Single</option>
+                                    <%}else{ %>
+                                   			 <option value="Single">Single</option>
                                     <%} %>
-                                   	    <option   value="0">Marital Status</option>
-                                        <option value="Single">Single</option>
-                                        <option value="Married">Married</option>
-                                        <option value="Widowed">Widowed</option>
-                                        <option value="Divorced">Divorced</option>
+                                    
+                                     <%if(maritalStatus.equalsIgnoreCase("Married")){ %>
+                                    		<option value="Married" selected="selected">Married</option>
+                                    <%}else{ %>
+                                   			<option value="Married">Married</option>
+                                    <%} %>
+                                    
+                                    <%if(maritalStatus.equalsIgnoreCase("Widowed")){ %>
+                                    		  <option value="Widowed" selected="selected">Widowed</option>
+                                    <%}else{ %>
+                                   			  <option value="Widowed">Widowed</option>
+                                    <%} %>
+                                   	    
+                                    <%if(maritalStatus.equalsIgnoreCase("Divorced")){ %>
+                                    		  <option value="Divorced" selected="selected">Divorced</option>
+                                    <%}else{ %>
+                                   			  <option value="Divorced">Divorced</option>
+                                    <%} %>
+                                        
+                                      
+                                        
                                     </select>
                                 </div>
-                             <!--    <div class="form-group">
-                                    <label class="form-label">Mother Tounge</label>
-                                    <select class="form-control">
-                                        <option selected="">English</option>
-                                        <option>English</option>
-                                        <option>English</option><option>English</option>
-                                        <option>English</option>
-                                    </select>
-                                </div> -->
-                               <!--  <div class="form-group">
-                                    <label class="form-label">Country</label>
-                                    <select class="form-control">
-                                        <option selected="">Country</option>
-                                        <option>Country</option>
-                                        <option>Country</option><option>Country</option>
-                                        <option>Country</option>
-                                    </select>
-                                </div> -->
-                                <!-- <div class="form-group">
-                                    <label class="form-label">Country</label>
-                                    <div class="mobile-no">
-                                        <input type="text" id="code" class="form-control"/>
-                                        <input type="text" id="number"  class="form-control"/>
-                                    </div>
-                                </div> -->
+                                
+                               
+                            
                                 <div class="form-group">
                                     <label class="form-label">Password</label>
-                                   <input type="password" id="txtPsw2" name="txtPsw2" value="<%=psw %>" class="form-control" placeholder="Password" />
+                                    <input type="password" class="form-control" id="txtPsw" name="txtPsw" value="<%=psw %>"/>
                                 </div>
+								 <!-- <div class="form-group">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-control"/>
+                                </div>
+								 <div class="form-group">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-control"/>
+                                </div> -->
                                 <div class="form-group">
-                                    <button style="color:white; background-color: #9d1104;font-size: 20px;font-size: 20px; font-weight: 700;float: right;border-radius: 4px !important;border: solid 1px #9d1104;" 
-                                    type="button"  id="btnRegister" name="btnRegister" value="Register now"> Register now</button>
+                                    <input type="submit"  id="btnRegister" name="btnRegister" class="btn btn-register" value="Register now"/>
                                 </div>
-                               <%--  
-                                <div  class="form-group" align="center" style="color: red">
-										<%
-										 String str="";
-										if(request.getAttribute(contentPage.ERROR)!=null){ 
-											str=((ErrorMsg)request.getAttribute(contentPage.ERROR)).getError();
-										
-										} %>
-										
-										<label><%=str  %> </label>
-					
-								</div>
-                               --%>
                                 
+                                	<div align="center" style="color: red">
+														<%
+														 String str="";
+														if(request.getAttribute(contentPage.ERROR)!=null){ 
+															str=((ErrorMsg)request.getAttribute(contentPage.ERROR)).getError();
+														
+														} %>
+														
+														<label><%=str %> </label>
+									
+								</div>
                             </form>
                         </div>
                     </div>
@@ -412,18 +421,18 @@
             </div>
         </section>
         <!--  Success Stories -->
-        <section class="success-story-section">
+    <section class="success-story-section">
             <h1>Success Stories</h1>
             <div class="container">               
                 <div class="success-story-slider owl-carousel">
                 
 
 				<%
-														for (memberStoryBean storyBean : storyList) {
-															String path[] = storyBean.getImgUrl().toString().split("temp");
-															String finalPath = path[1];															
-															String fileName = finalPath.substring(finalPath.lastIndexOf("\\")+1);
-													%>
+					for (memberStoryBean storyBean : storyList) {
+						String path[] = storyBean.getImgUrl().toString().split("temp");
+						String finalPath = path[1];															
+						String fileName = finalPath.substring(finalPath.lastIndexOf("\\")+1);
+		        %>
 
 				<div class="success-story-block">
                         <div class="story-image">
@@ -563,82 +572,52 @@
                 <p><i class="fa fa-copyright"></i> - All Rights With <a href="javascript:;">Hamra Nikah</a></p>
             </div>
         </footer>
+        
+        
+		 
+		
+		
         <script type="text/javascript" src="memberCSS/js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="memberCSS/plugin/bootstrap/bootstrap.bundle.min.js"></script>
         <script type="text/javascript" src="memberCSS/plugin/owl-carousel/owl.carousel.min.js"></script>
         <script type="text/javascript" src="memberCSS/js/default.js"></script>
         
-        
-         <!-- <script src="assets/js/jquery-1.11.3.min.js"></script> -->
-
-
-		<!-- bootstrap & fontawesome -->
-		 <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" /> 
-		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
-		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
-
-		<!-- text fonts -->
-		 <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" /> 
-
-		<!-- ace styles -->
-		 <link rel="stylesheet" href="assets/css/ace.min.css" /> 
-
-		 <link rel="stylesheet" href="assets/css/ace-rtl.min.css" /> 
-		 <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css" />
-		 
-		 <script src="assets/js/bootstrap-datepicker.min.js"></script>
-		<script src="assets/js/jquery.hotkeys.index.min.js"></script>
-		<script src="assets/js/select2.min.js"></script>
-		
-		<script type='text/javascript' src='dwr/engine.js'></script>
-		<script type='text/javascript' src='dwr/interface/softNiceUtilityData.js'></script>
-		<script type='text/javascript' src='dwr/util.js'></script>
-		<script src='js/softnice.js?v=" + Date.now() + "' type="text/javascript" charset="utf-8"></script>
+ 		
+		 <!--  <script src="assets/js/jquery-1.11.3.min.js"></script>   -->
+  	<!-- 	<script src="assets/js/bootstrap-datepicker.min.js"></script>
+ 		<script src="assets/js/jquery.hotkeys.index.min.js"></script>
+		<script src="assets/js/select2.min.js"></script> 
         
         
- <script>
- 
+         -->
+        
+        <script>
+      //  $.noConflict();
 $(document).ready(function($){
 		
+	 getState('<%=country %>','<%=state %>');
+	 getCity('<%=state %>','<%=city %>')
+		
+		
+	        
+	       /*  $("#txtDob").datetimepicker({
+	            format: 'L',
+	            ignoreReadonly: true
+	          }); 
+ */
+	 
 	    $('#btnSubmit').click(function(){ 
 	    		$("#key").val("login");
 	        	$("#memberForm1").submit();
 	    });
 	    
-	   /*  $('#btnRegister').click(function(){ 
-	    	$("#key").val("register");
-        	$("#memberForm2").submit();
-    }); */
-	    
-	    getState('<%=country %>','<%=state %>');
-		getCity('<%=state %>','<%=city %>')
-		
-		
-		    $('#btnSubmit').click(function(){ 
-		        	$("#memberForm2").submit();
-		    });
-		    
-		    $('#btnRegister').click(function(){ 
-		    	$("#key").val("register");
-	        	$("#memberForm2").submit();
-	    }); 
-		    
-		     $("#txtDob").datepicker({
-			    changeMonth: true,
-	            changeYear: true,
-	            autoclose: true,
-	            yearRange: '-100y:c+nn',
-	            clearBtn: true,
-	            endDate:'-20y', //'12-06-1990' ,
-	            closeBtn: true, // close button visible
-	        
-	        }); 
-
-	
 
 	});
+
 </script>
+
+
+        
         
     </body>
 </html>

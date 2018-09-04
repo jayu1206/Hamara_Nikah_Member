@@ -276,10 +276,10 @@ public class memberMaintenance {
 		}
 		bean.setLastName(request.getParameter("txtLastName"));
 		
-		if (request.getParameter("txtDob") == null	|| request.getParameter("txtDob").trim().length() == 0){
+		/*if (request.getParameter("txtDob") == null	|| request.getParameter("txtDob").trim().length() == 0){
 			return new ErrorMsg(1, "DOB field is required");
 		}
-		bean.setDob(validation.convertStringToDate(request.getParameter("txtDob")));
+		bean.setDob(validation.convertStringToDate(request.getParameter("txtDob")));*/
 		
 		if (request.getParameter("gender") == null	|| request.getParameter("gender").trim().length() == 0){
 			return new ErrorMsg(1, "Gender field is required");
@@ -310,11 +310,6 @@ public class memberMaintenance {
 		}
 		bean.setEmail(request.getParameter("txtEmail"));
 		
-		 /*<option value="Single">Single</option>
-         <option value="Married">Married</option>
-         <option value="Widowed">Widowed</option>
-         <option value="Divorced">Divorced</option>
-		*/
 		if (request.getParameter("maritalStatus") == null || request.getParameter("maritalStatus").trim().length() == 0){
 			return new ErrorMsg(1, "maritalStatus field is required");
 		}
@@ -330,7 +325,7 @@ public class memberMaintenance {
 		
 		
 		if (request.getParameter("txtPsw") == null	|| request.getParameter("txtPsw").trim().length() == 0){
-			return new ErrorMsg(1, "First name field is required");
+			return new ErrorMsg(1, "Password is required");
 		}
 		try {
 			bean.setPassword(EncrypitDecrypit.encrypt(request.getParameter("txtPsw"), "password"));
@@ -340,7 +335,7 @@ public class memberMaintenance {
 		}
 		
 		bean.setStatus(true);
-		bean.setAge( validation.countAge(bean.getDob())  );
+		/*bean.setAge( validation.countAge(bean.getDob())  );*/
 		String str[]=UUID.randomUUID().toString().split("-");
          bean.setMemberId(str[0].toUpperCase());
 		 bean.setCreationDate(new Date());
@@ -380,6 +375,12 @@ public class memberMaintenance {
 		memberDAO dao=new memberImpl();
 		
 		memberBean bean=dao.getMemberBaseOnId( Integer.parseInt(request.getParameter("txtId")));
+		
+		if (request.getParameter("txtDob") == null	|| request.getParameter("txtDob").trim().length() == 0){
+			return new ErrorMsg(1, "DOB field is required");
+		}
+		bean.setDob(validation.convertStringToDate(request.getParameter("txtDob")));
+		bean.setAge( validation.countAge(bean.getDob())  );
 		
 		if (request.getParameter("txtPhno")  == null || request.getParameter("txtPhno").trim().length() == 0){
 			return new ErrorMsg(1, "Phone field is required");

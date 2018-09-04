@@ -239,7 +239,7 @@ public class memberServlet extends HttpServlet {
 			}
 			
 			if(request.getParameter("key").equals("addMember")){
-				
+				adminMaintenance.getInstance().getAllCountry(request);
 				ErrorMsg obj=(ErrorMsg) memberMaintenance.getInstance().addMemberOtherDetails(request);
 				request.setAttribute("error", obj);
 				if(obj.getErrorCode()!=0){

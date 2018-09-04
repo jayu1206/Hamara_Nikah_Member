@@ -302,7 +302,7 @@ a{
     padding: 40px 0;    
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
+    background-position: inherit;
 }
 .registration-form h2{
     text-align: center;
