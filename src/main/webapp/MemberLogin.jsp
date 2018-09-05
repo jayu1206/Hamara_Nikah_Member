@@ -8,6 +8,8 @@
 <%@page import="com.softNice.nikah.beans.settingBean"%>
 <%@page import="com.softNice.nikah.constent.contentPage"%>
 <%@page import="com.softNice.nikah.constent.ErrorMsg"%>
+<%@page import="com.softNice.nikah.beans.memberStoryBean"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <html lang="en">
@@ -84,6 +86,13 @@
 					 email=request.getParameter("txtEmail");
 					 psw=request.getParameter("txtPsw");
 					 maritalStatus = request.getParameter("maritalStatus");
+					
+				}
+				
+				ArrayList<memberStoryBean> storyList=new ArrayList<memberStoryBean>();				
+			
+				if(getServletContext().getAttribute(contentPage.STORIES)!=null){
+					storyList = (ArrayList<memberStoryBean>) getServletContext().getAttribute(contentPage.STORIES);
 					
 				}
 		%>
@@ -407,17 +416,30 @@
             <h1>Success Stories</h1>
             <div class="container">               
                 <div class="success-story-slider owl-carousel">
-                    <div class="success-story-block">
+                
+
+				<%
+														for (memberStoryBean storyBean : storyList) {
+															String path[] = storyBean.getImgUrl().toString().split("temp");
+															String finalPath = path[1];															
+															String fileName = finalPath.substring(finalPath.lastIndexOf("\\")+1);
+													%>
+
+
+				<div class="success-story-block">
                         <div class="story-image">
-                            <img src="memberCSS/images/story1.png" alt=""/>
+                            <img src="<%="webapp/temp/"+fileName %>" alt=""/>
                         </div>
                         <div class="success-story-content">
-                            <p>Thank you Muslim Matrimony for helping me find perfect match.</p>
-                            <h4>- Shahana & Sajin</h4>
+                            <p><%=storyBean.getSuccessStory() %></p>
+                            <h4>- <%=storyBean.getBrideName() %> & <%=storyBean.getGroomName() %></h4>
                         </div>                         
                     </div>
+                 <%
+						}
+				 %>
 
-                    <div class="success-story-block">
+                    <!-- <div class="success-story-block">
                         <div class="story-image">
                             <img src="memberCSS/images/story2.png" alt=""/>
                         </div>
@@ -434,7 +456,7 @@
                             <p>Thank you Muslim Matrimony for helping me find perfect match.</p>
                             <h4>- Shahana & Sajin</h4>
                         </div>                         
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
@@ -546,13 +568,13 @@
         <script type="text/javascript" src="memberCSS/js/default.js"></script>
         
         
-         <script src="assets/js/jquery-1.11.3.min.js"></script>
+         <!-- <script src="assets/js/jquery-1.11.3.min.js"></script> -->
 
 
 		<!-- bootstrap & fontawesome -->
 		 <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" /> 
-	<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
 
 		<!-- text fonts -->

@@ -32,12 +32,16 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import com.softNice.nikah.beans.memberStoryBean;
 import com.softNice.nikah.beans.permissionnamesBean;
 import com.softNice.nikah.beans.settingBean;
 import com.softNice.nikah.constent.contentPage;
 import com.softNice.nikah.dao.administratorDAO;
+import com.softNice.nikah.dao.memberDAO;
 import com.softNice.nikah.impl.administratorImpl;
+import com.softNice.nikah.impl.memberImpl;
 import com.softNice.nikah.maintenance.adminMaintenance;
+import com.softNice.nikah.maintenance.memberMaintenance;
 import com.softNice.nikah.maintenance.settingMaintenance;
 
 
@@ -62,6 +66,10 @@ public class listenerClass implements ServletContextListener{
 		context.setAttribute(contentPage.PERMISSIONNAME, permissionNameList);
 		settingBean bean= settingMaintenance.getInstance().getSetting("general_setting", null);
 		context.setAttribute(contentPage.SETTING,bean);
+		
+		memberDAO memDAO = new memberImpl();
+		ArrayList<memberStoryBean>  storyBeanList= memDAO.getAllStories();
+		context.setAttribute(contentPage.STORIES, storyBeanList);	
 		
 		
 		HashMap<Integer, String> map = new HashMap<Integer, String>();
