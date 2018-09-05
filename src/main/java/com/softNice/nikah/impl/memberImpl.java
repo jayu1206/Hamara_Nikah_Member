@@ -612,4 +612,39 @@ public class memberImpl implements memberDAO {
 		}
 	}
 
+	@Override
+	public memberBean checkPartnerIdIsAvailable(String partnerMemberId) {
+		
+		// TODO Auto-generated method stub
+		memberBean bean = null;
+		Session session = null;
+		try {
+			session = HibernateFactory.openSession();
+			Query query= null;
+			query = session.createQuery(" from memberBean where  memberId=:partnerMemberId ");
+			query.setParameter("memberId", partnerMemberId);
+			
+			if(query.list().get(0)!=null){
+				 bean = (memberBean) query.list().get(0);
+			}
+			
+			
+
+		} catch (Exception e) {
+			log.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
+			  
+		} finally {
+			try {
+				HibernateFactory.close(session);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return bean;
+	
+	}
+
 }

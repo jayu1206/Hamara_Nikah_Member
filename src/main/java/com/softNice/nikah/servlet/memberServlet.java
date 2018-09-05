@@ -334,9 +334,9 @@ public class memberServlet extends HttpServlet {
 			                ErrorMsg obj=(ErrorMsg) memberMaintenance.getInstance().insertMemberStory(bean,request);
 			                request.setAttribute("error", obj);
 			                if(obj.getErrorCode()!=0){
-			                	rd=request.getRequestDispatcher("/memberStory.jsp");
+			                	rd=request.getRequestDispatcher("/member/memberStory.jsp");
 							}else{
-								rd=request.getRequestDispatcher("/MemberLogin.jsp");
+								rd=request.getRequestDispatcher("/member/memberStory.jsp");
 							}
 							rd.forward(request, response); 
 			            } catch (Exception ex) {

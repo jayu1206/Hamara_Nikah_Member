@@ -53,4 +53,6 @@ public interface memberDAO {
 
 	public abstract int updateOrder(orderBean bean);
 
+	public abstract memberBean checkPartnerIdIsAvailable(String partnerMemberId);
+
 }

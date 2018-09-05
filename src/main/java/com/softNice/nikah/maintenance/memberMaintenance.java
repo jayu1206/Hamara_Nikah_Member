@@ -705,6 +705,14 @@ public class memberMaintenance {
 			if (bean.getPartnerMemberId() == null	|| bean.getPartnerMemberId().length() == 0){
 				return new ErrorMsg(1, "Partner's Member Id field is required");
 			}
+			if (bean.getPartnerMemberId() != null){
+				
+				memberDAO dao=new memberImpl();
+				memberBean mbean = dao.checkPartnerIdIsAvailable(bean.getPartnerMemberId());
+				if (mbean == null){
+					return new ErrorMsg(1, "Partner's Member Id is not Found");
+				}				
+			}
 				
 			if (bean.getEngDate() == null || bean.getEngDate().toString().length() == 0){
 				return new ErrorMsg(1, "Please select Engagement Date");
