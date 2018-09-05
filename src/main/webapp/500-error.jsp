@@ -59,11 +59,12 @@
 						<div class="login-container">
 							<div class="center">
 								<h1>
-									<i class="ace-icon fa fa-leaf green"></i>
-									<span class="red"><%=mailbean.getApp_name() %></span>
-									<span class="white" id="id-text2">Application</span>
+									<%-- <i class="ace-icon fa fa-leaf green"></i>
+									<span class="red"><%=mailbean.getApp_name() %></span> --%>
+									<img src="memberCSS/images/logo.png" alt="logo">
+									<!-- <span class="white" id="id-text2">Application</span> -->
 								</h1>
-								<h4 class="blue" id="id-company-text">&copy; <%=mailbean.getCmpName() %></h4>
+								<h4 class="green" id="id-company-text">&copy; <%=mailbean.getCmpName() %></h4>
 							</div>
 
 							<div class="space-6"></div>
@@ -79,7 +80,7 @@
 
 											<div class="space-6"></div>
 
-									<form action="loginServlet" method="get" >
+									<form action="memberServlet" method="get" >
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
