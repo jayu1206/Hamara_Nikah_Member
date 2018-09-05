@@ -129,8 +129,9 @@ public class memberServlet extends HttpServlet {
 			if (request.getParameter("key").equals("addStory")){
 				adminMaintenance.getInstance().getAllCountry(request);
 				request.getSession().setAttribute(contentPage.SETTING, getServletContext().getAttribute(contentPage.SETTING));
-				rd=request.getRequestDispatcher("/memberStory.jsp");  
+				rd=request.getRequestDispatcher("/member/memberStory.jsp");  
 				rd.forward(request, response);
+//				request.setAttribute(contentPage.CONTENT_PAGE, "/member/memberStory.jsp");
 			}
 			if (request.getParameter("key").equals("viewStory")){				
 				

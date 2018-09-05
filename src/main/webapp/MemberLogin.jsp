@@ -425,10 +425,11 @@
 															String fileName = finalPath.substring(finalPath.lastIndexOf("\\")+1);
 													%>
 
-
 				<div class="success-story-block">
                         <div class="story-image">
-                            <img src="<%="webapp/temp/"+fileName %>" alt=""/>
+                           <%--  <img src="<%="webapp/temp/"+fileName %>" alt=""/> --%>
+                             <img src="<%="webapp/temp/"+fileName %>" alt="Image not available"/>
+                            
                         </div>
                         <div class="success-story-content">
                             <p><%=storyBean.getSuccessStory() %></p>
