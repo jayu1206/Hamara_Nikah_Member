@@ -53405,6 +53405,17 @@ INSERT INTO `users` (`id`,`userName`,`password`,`firstName`,`lastName`,`phno`,`c
 
 
 
+CREATE TABLE `softnicenikah`.`request_member_plan` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `memberId` VARCHAR(45) NULL,
+  `planId` VARCHAR(45) NULL,
+  `flag` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+ALTER TABLE `softnicenikah`.`request_member_plan` 
+CHANGE COLUMN `planId` `planId` INT(11) NULL DEFAULT NULL ;
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
