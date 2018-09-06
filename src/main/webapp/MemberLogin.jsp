@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<%@page import="com.softNice.nikah.beans.memberBean"%>
+<%@page import="com.softNice.nikah.beans.masterBean"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
 <%@ page isELIgnored="true" %>
 <%@page import="com.softNice.nikah.maintenance.adminMaintenance"%>
 <%@page import="com.softNice.nikah.beans.countryBean"%>
@@ -56,7 +60,17 @@
     
     
     
-    
+     request.getSession().setAttribute(contentPage.MASTERMAPOBJ, getServletContext().getAttribute(contentPage.MASTERMAPOBJ));
+     HashMap<Integer, String> map2 = new HashMap<Integer, String>();
+		if(request.getSession().getAttribute(contentPage.MASTERMAPOBJ)!=null){
+			map2 = (HashMap<Integer, String>)  request.getSession().getAttribute(contentPage.MASTERMAPOBJ);
+			for(Map.Entry m:map2.entrySet()){
+				adminMaintenance.getInstance().getMasterBaseOnId((int)m.getKey(),m.getValue().toString(),request);
+				
+			}
+		}
+		
+		
     			adminMaintenance.getInstance().getAllCountry(request);
     
 				String firstName="",lastName="",gender="",dob="",email="",psw="",maritalStatus="";
@@ -66,8 +80,12 @@
 				
 				
 				
-				
-				
+				boolean sessionUserFlag= false;
+				if(request.getSession().getAttribute(contentPage.MEMBERS)!=null){
+					
+					sessionUserFlag = true;
+					
+				}
 				
 				
 				settingBean settingbean= null;
@@ -145,6 +163,8 @@
                                 <img src="memberCSS/images/logo.png" alt="logo"/>
                             </a>
                         </div>
+                        
+                        <% if(!sessionUserFlag){ %>
                         <div class="col-lg-7">
                             <div class="login-form">
                                 <form action="memberServlet" method="post" name="memberForm1" id="memberForm1" class="float-none float-lg-right" >
@@ -162,6 +182,7 @@
                                 </form>
                             </div>
                         </div>
+                        <% }%>
                     </div>
                 </div>
             </div>
@@ -171,6 +192,7 @@
                 <div class="row">
                     <div class="offset-lg-6 col-lg-6">
                         <div class="registration-form">
+                        	<% if(!sessionUserFlag){ %>
                             <h2>Perfect Place for your Perfect Matchs</h2>
                             <form action="memberServlet?key=newRegister" method="post" name="memberForm2" id="memberForm2">
                                 <h1>Registration FREE</h1>
@@ -311,6 +333,7 @@
 									
 								</div>
                             </form>
+                            <%} %>
                         </div>
                     </div>
                 </div>
@@ -319,21 +342,21 @@
         <section class="find-partner-section">
             <div class="container">
                 <h2>Find the one who completes you</h2>
-                <form action=""  class="partner-form">
+                <form action="ContentServlet?key=searchMember" method="post"  class="partner-form" name="memberForm3" id="memberForm3">
                     <div class="radio-block">
                         <label class="radio inline"> 
-                            <input type="radio" name="sex" value="Bride" checked="checked">
+                            <input type="radio" name="gender"  value="female" checked="checked">
                             <span>Bride </span> 
                         </label>
                         <label class="radio inline"> 
-                            <input type="radio" name="sex" value="Groom">
+                            <input type="radio" name="gender" value="male">
                             <span>Groom</span> 
                         </label>
                     </div>
                     <div class="age-block">
                         <div class="form-detail">
                             <label>Age</label>
-                            <select>
+                            <select id="ageFrom" name="ageFrom" >
                                 <option selected="">18</option>
                                 <option>19</option>
                                 <option>20</option> 
@@ -351,7 +374,7 @@
                         </div>
                         <div class="form-detail">
                             <label>To</label>
-                            <select>
+                            <select id="ageTo" name="ageTo" >
                                 <option selected="">18</option>
                                 <option>19</option>
                                 <option>20</option> 
@@ -367,180 +390,260 @@
                                 <option>30</option>
                             </select>
                         </div>
+                        <%
+																
+								ArrayList<masterBean> list = null;
+									if(request.getSession().getAttribute(contentPage.MotherTounge)!=null){
+										list = (ArrayList<masterBean>) request.getSession().getAttribute(contentPage.MotherTounge);
+									}
+															
+							%>
                         <div class="form-detail">
                             <label id="mother-tounge">Mother Tounge</label>
                             <select>
-                                <option selected="">English</option>
-                                <option>English</option>
-                                <option>English</option><option>English</option>
-                                <option>English</option>
+                            	<option value="0">Select</option>
+                                <%for(masterBean mstbean : list){%>
+									<option value="<%=mstbean.getId() %>"  ><%=mstbean.getValue() %></option>
+							<% }%>
                             </select>
                         </div>
                         <div class="form-detail">
-                            <label id="sect">Sect</label>
+                            <label id="sect">Country</label>
                             <select>
-                                <option selected="">Sect</option>
-                                <option>Sect</option>
-                                <option>Sect</option>
-                                <option>Sect</option>
-                                <option>Sect</option>
+                            	<option value="0">Select</option>
+                                <%for(countryBean countrybean : countryList){ %>
+										<option value="<%=countrybean.getId() %>" ><%=countrybean.getName() %></option>
+								<%}%>
 
                             </select>
                         </div>                       
-                        <div class="form-detail">
-                            <label>Division</label>
-                            <select>
-                                <option selected="">Division</option>
-                                <option>Division</option>
-                                <option>Division</option>
-                                <option>Division</option>
-                                <option>Division</option>
-                            </select>
-                        </div>
-                        <input type="submit" class="btn btn-white" value="search"/>
                     </div>
+                    <div class="radio-block">
+                    		<input type="submit" class="btn btn-white" value="search"/>
+                     </div>
                 </form>
             </div>
         </section>
-        <section class="our-services-section">
-            <h1>Your partner search just got better with <span>Hamara nikah</span></h1>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="our-service-block">
-                            <div class="our-service-img">
-                                <i class="fa fa-edit"></i>
-                            </div>
-                            <div class="services-content">
-                                <h3>Sign up</h3>
-                                <p>Register for free and put up your profile</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="our-service-block">
-                            <div class="our-service-img">
-                                <i class="fa fa-group"></i>
-                            </div>
-                            <div class="services-content">
-                                <h3>Connect</h3>
-                                <p>Select & Connect with Matches you like.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="our-service-block">
-                            <div class="our-service-img">
-                                <i class="fa fa-comments-o"></i>
-                            </div>
-                            <div class="services-content">
-                                <h3>Interact</h3>
-                                <p>Become a Premium Member & Start a conversation  </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+       
+      <% if(sessionUserFlag){ %>
+	        <!-- Search result content -->
+	         <%
+	         		if(request.getAttribute(contentPage.MEMBERSEARCH)!=null){
+	         			
+	         			ArrayList<memberBean> memberList = new ArrayList<memberBean>();
+	         			memberList = (ArrayList<memberBean>)request.getAttribute(contentPage.MEMBERSEARCH);
+	         %>
+	         <section class="recently-joined-section">
+	            <div class="container">
+	                <h2>Search members....</h2>
+	                <div class="row" >
+	                <%for(memberBean bean : memberList){ %>
+	                    <div class="col-md-6 col-lg-4">
+	                        <div class="joined-block">
+	                            <div class="joined-member-image">
+	                                <img src="memberCSS/images/join1.png" alt=""/>
+	                                <h4><%=bean.getFirstName() +" "+bean.getLastName() %></h4>
+	                            </div>
+	                            <div class="joined-member-info">
+	                                <h3><%=bean.getFirstName() +" "+bean.getLastName() %></h3>
+	                                <p>Age:<%=bean.getAge() %></p>
+	                                <p>City: <%=bean.getCityName() %></p>
+	                                <a href="javascrupt:;" class="btn">contact me</a>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <%} %>
+	                <!--     <div class="col-md-6 col-lg-4">
+	                        <div class="joined-block">
+	                            <div class="joined-member-image">
+	                                <img src="memberCSS/images/join2.png" alt=""/>
+	                                <h4>Loremm Ipsum</h4>
+	                            </div>
+	                            <div class="joined-member-info">
+	                                <h3>Lorem Ipsum</h3>
+	                                <p>Age:26</p>
+	                                <p>City:Vadodara</p>
+	                                <a href="javascrupt:;" class="btn">contact me</a>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6 col-lg-4">
+	                        <div class="joined-block">
+	                            <div class="joined-member-image">
+	                                <img src="memberCSS/images/join3.png" alt=""/>
+	                                <h4>Loremm Ipsum</h4>
+	                            </div>
+	                            <div class="joined-member-info">
+	                                <h3>Lorem Ipsum</h3>
+	                                <p>Age:26</p>
+	                                <p>City:Vadodara</p>
+	                                <a href="javascrupt:;" class="btn">contact me</a>
+	                            </div>
+	                        </div>
+	                    </div> -->
+	                </div>
+	            </div>
+	        </section>
+	        <%} %>
+         <%}else{ %>
+         		<section class="our-services-section">
+	            <h1>Your partner search just got better with <span>Hamara nikah</span></h1>
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col-md-4">
+	                        <div class="our-service-block">
+	                            <div class="our-service-img">
+	                                <i class="fa fa-edit"></i>
+	                            </div>
+	                            <div class="services-content">
+	                                <h3>Sign up</h3>
+	                                <p>Register for free and put up your profile</p>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-4">
+	                        <div class="our-service-block">
+	                            <div class="our-service-img">
+	                                <i class="fa fa-group"></i>
+	                            </div>
+	                            <div class="services-content">
+	                                <h3>Connect</h3>
+	                                <p>Select & Connect with Matches you like.</p>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-4">
+	                        <div class="our-service-block">
+	                            <div class="our-service-img">
+	                                <i class="fa fa-comments-o"></i>
+	                            </div>
+	                            <div class="services-content">
+	                                <h3>Interact</h3>
+	                                <p>Become a Premium Member & Start a conversation  </p>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
+       
         <!--  Success Stories -->
-    <section class="success-story-section">
-            <h1>Success Stories</h1>
-            <div class="container">               
-                <div class="success-story-slider owl-carousel">
-                
-
-				<%
-					for (memberStoryBean storyBean : storyList) {
-						String path[] = storyBean.getImgUrl().toString().split("temp");
-						String finalPath = path[1];															
-						String fileName = finalPath.substring(finalPath.lastIndexOf("\\")+1);
-		        %>
-				<div class="success-story-block">
-                        <div class="story-image">
-                           <%--  <img src="<%="webapp/temp/"+fileName %>" alt=""/> --%>
-                             <img src=<%="http://localhost:8085/SoftNice_Hamara_Nikah/webapp/temp/"+fileName%> alt="Image not available"/>
-                            
-                        </div>
-                        <div class="success-story-content">
-                            <p><%=storyBean.getSuccessStory() %></p>
-                            <h4>- <%=storyBean.getBrideName() %> & <%=storyBean.getGroomName() %></h4>
-                        </div>                         
-                    </div>
-                 <%
-						}
-				 %>
-
-                    <!-- <div class="success-story-block">
-                        <div class="story-image">
-                            <img src="memberCSS/images/story2.png" alt=""/>
-                        </div>
-                        <div class="success-story-content">
-                            <p>Thank you Muslim Matrimony for helping me find perfect match.</p>
-                            <h4>- Shahana & Sajin</h4>
-                        </div>                         
-                    </div>
-                    <div class="success-story-block">
-                        <div class="story-image">
-                            <img src="memberCSS/images/story1.png" alt=""/>
-                        </div>
-                        <div class="success-story-content">
-                            <p>Thank you Muslim Matrimony for helping me find perfect match.</p>
-                            <h4>- Shahana & Sajin</h4>
-                        </div>                         
-                    </div> -->
-                </div>
-            </div>
-        </section>
-        <!-- Recently Joined Section Starts  -->
-        <section class="recently-joined-section">
-            <div class="container">
-                <h2>Recently Joined....</h2>
-                <div class="row">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="joined-block">
-                            <div class="joined-member-image">
-                                <img src="memberCSS/images/join1.png" alt=""/>
-                                <h4>Loremm Ipsum</h4>
-                            </div>
-                            <div class="joined-member-info">
-                                <h3>Lorem Ipsum</h3>
-                                <p>Age:26</p>
-                                <p>City:Vadodara</p>
-                                <a href="javascrupt:;" class="btn">contact me</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="joined-block">
-                            <div class="joined-member-image">
-                                <img src="memberCSS/images/join2.png" alt=""/>
-                                <h4>Loremm Ipsum</h4>
-                            </div>
-                            <div class="joined-member-info">
-                                <h3>Lorem Ipsum</h3>
-                                <p>Age:26</p>
-                                <p>City:Vadodara</p>
-                                <a href="javascrupt:;" class="btn">contact me</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="joined-block">
-                            <div class="joined-member-image">
-                                <img src="memberCSS/images/join3.png" alt=""/>
-                                <h4>Loremm Ipsum</h4>
-                            </div>
-                            <div class="joined-member-info">
-                                <h3>Lorem Ipsum</h3>
-                                <p>Age:26</p>
-                                <p>City:Vadodara</p>
-                                <a href="javascrupt:;" class="btn">contact me</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+	    <section class="success-story-section">
+	            <h1>Success Stories</h1>
+	            <div class="container">               
+	                <div class="success-story-slider owl-carousel">
+	                
+	
+					<%
+						for (memberStoryBean storyBean : storyList) {
+							String path[] = storyBean.getImgUrl().toString().split("temp");
+							String finalPath = path[1];															
+							String fileName = finalPath.substring(finalPath.lastIndexOf("\\")+1);
+			        %>
+					<div class="success-story-block">
+	                        <div class="story-image">
+	                           <%--  <img src="<%="webapp/temp/"+fileName %>" alt=""/> --%>
+	                             <img src=<%="http://localhost:8085/SoftNice_Hamara_Nikah/webapp/temp/"+fileName%> alt="Image not available"/>
+	                            
+	                        </div>
+	                        <div class="success-story-content">
+	                            <p><%=storyBean.getSuccessStory() %></p>
+	                            <h4>- <%=storyBean.getBrideName() %> & <%=storyBean.getGroomName() %></h4>
+	                        </div>                         
+	                    </div>
+	                 <%
+							}
+					 %>
+	
+	                    <!-- <div class="success-story-block">
+	                        <div class="story-image">
+	                            <img src="memberCSS/images/story2.png" alt=""/>
+	                        </div>
+	                        <div class="success-story-content">
+	                            <p>Thank you Muslim Matrimony for helping me find perfect match.</p>
+	                            <h4>- Shahana & Sajin</h4>
+	                        </div>                         
+	                    </div>
+	                    <div class="success-story-block">
+	                        <div class="story-image">
+	                            <img src="memberCSS/images/story1.png" alt=""/>
+	                        </div>
+	                        <div class="success-story-content">
+	                            <p>Thank you Muslim Matrimony for helping me find perfect match.</p>
+	                            <h4>- Shahana & Sajin</h4>
+	                        </div>                         
+	                    </div> -->
+	                </div>
+	            </div>
+	        </section>
+	        
+	        <!-- Recently Joined Section Starts  -->
+	        <section class="recently-joined-section">
+	            <div class="container">
+	                <h2>Recently Joined....</h2>
+	                <div class="row" >
+	                    <div class="col-md-6 col-lg-4">
+	                        <div class="joined-block">
+	                            <div class="joined-member-image">
+	                                <img src="memberCSS/images/join1.png" alt=""/>
+	                                <h4>Loremm Ipsum</h4>
+	                            </div>
+	                            <div class="joined-member-info">
+	                                <h3>Lorem Ipsum</h3>
+	                                <p>Age:26</p>
+	                                <p>City:Vadodara</p>
+	                                <a href="javascrupt:;" class="btn">contact me</a>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6 col-lg-4">
+	                        <div class="joined-block">
+	                            <div class="joined-member-image">
+	                                <img src="memberCSS/images/join2.png" alt=""/>
+	                                <h4>Loremm Ipsum</h4>
+	                            </div>
+	                            <div class="joined-member-info">
+	                                <h3>Lorem Ipsum</h3>
+	                                <p>Age:26</p>
+	                                <p>City:Vadodara</p>
+	                                <a href="javascrupt:;" class="btn">contact me</a>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6 col-lg-4">
+	                        <div class="joined-block">
+	                            <div class="joined-member-image">
+	                                <img src="memberCSS/images/join3.png" alt=""/>
+	                                <h4>Loremm Ipsum</h4>
+	                            </div>
+	                            <div class="joined-member-info">
+	                                <h3>Lorem Ipsum</h3>
+	                                <p>Age:26</p>
+	                                <p>City:Vadodara</p>
+	                                <a href="javascrupt:;" class="btn">contact me</a>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
+         
+       <%} %>
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
         <!-- Story Block Starts  -->
         <section class="story-section">
             <div class="container">

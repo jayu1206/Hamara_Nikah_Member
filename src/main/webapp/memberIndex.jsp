@@ -84,20 +84,20 @@
 </head>
 <body class="no-skin">
 		
-
+		<div  style="width: 1200px; margin: 0px auto;  ">
 			<jsp:include page="/memberMain/header.jsp" flush="false"></jsp:include>
-		
-	<div class="main-container ace-save-state" id="main-container">
+			<div class="main-container ace-save-state" id="main-container"  >
 			<script type="text/javascript">
 				try{ace.settings.loadState('main-container')}catch(e){}
 			</script>	
 				
-			<jsp:include page="/memberMain/menu.jsp" flush="false"></jsp:include>
+			 <jsp:include page="/memberMain/menu.jsp" flush="false"></jsp:include> 
 			<jsp:include page="/memberMain/content.jsp" flush="false"></jsp:include>
 			<jsp:include page="/memberMain/footer.jsp" flush="false"></jsp:include>
 				
 				
 	</div><!-- /.main-container -->
+	</div> 
 
 		<!-- basic scripts -->
 

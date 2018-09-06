@@ -36,20 +36,12 @@
 	
 	%>
 	
-
-		<div id="navbar" class="navbar navbar-default          ace-save-state"  style="background-color: #9d1104;    min-height: 77px;" >
+	
+		<div id="navbar" class="navbar navbar-default ace-save-state"   >
 			<div class="navbar-container ace-save-state" id="navbar-container">
-			<!-- 	<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
-					<span class="sr-only">Toggle sidebar</span>
+				 <div class='col-md-4'> 
 
-					<span class="icon-bar"></span>
-
-					<span class="icon-bar"></span>
-
-					<span class="icon-bar"></span>
-				</button> -->
-
-				<div class="navbar-header pull-left" style="margin-top: 0%;">
+				<div class="navbar-header pull-left">
 					<a href="#" class="navbar-brand">
 						<small>
 							<!-- <i class="fa fa-leaf"></i> -->
@@ -58,33 +50,11 @@
 						</small>
 					</a>
 				</div>
-
-				<div class="navbar-buttons navbar-header pull-right" role="navigation">
+				 </div> 
+				<div class='col-md-8'>
+				<div class="navbar-buttons navbar-header pull-right " role="navigation">
 					<ul class="nav ace-nav">
-				<!-- 		<li class="grey dropdown-modal">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								<i class="ace-icon fa fa-tasks"></i>
-								<span class="badge badge-grey">4</span>
-							</a>
-
-							<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-								<li class="dropdown-header">
-									<i class="ace-icon fa fa-check"></i>
-									4 Tasks to complete
-								</li>
-
-							
-
-								<li class="dropdown-footer">
-									<a href="#">
-										See tasks with details
-										<i class="ace-icon fa fa-arrow-right"></i>
-									</a>
-								</li>
-							</ul>
-						</li> -->
-
-			
+				
 						<li class="light-blue dropdown-modal" style="margin-top: 7%;">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle" style="background-color: #9d1104;">
 								<img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
@@ -124,7 +94,9 @@
 						</li>
 					</ul>
 				</div>
+				</div>
 			</div><!-- /.navbar-container -->
 		</div>
+		
 		
 		

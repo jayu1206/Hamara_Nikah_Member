@@ -530,6 +530,7 @@ public class adminMaintenance {
 		administratorDAO dao= new administratorImpl();
 		ArrayList<masterBean>   list=dao.getMasterBaseOnMasterID(key);
 		request.getSession().setAttribute(value, list);
+		System.out.println("Key "+key);
 		/*map.put(1,"Religion");
 		map.put(2,"Culture");
 		map.put(3,"Education"); 

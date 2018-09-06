@@ -1,4 +1,5 @@
 
+<%@page import="com.softNice.nikah.beans.memberDetailsBean"%>
 <%@page import="com.softNice.nikah.utility.EncrypitDecrypit"%>
 <%@page import="com.softNice.nikah.beans.memberBean"%>
 <%@page import="com.softNice.nikah.beans.masterBean"%>
@@ -60,6 +61,32 @@
 									 phno=bean.getPhno()==null?"":bean.getPhno();
 									 psw=EncrypitDecrypit.decrypt(bean.getPassword(), "password"); 
 									 confPsw=psw;
+									 
+									 if(bean.getDetails().size()>0){
+										 ArrayList<memberDetailsBean> list = new ArrayList<memberDetailsBean>(bean.getDetails());
+												for(memberDetailsBean detailsBean : list){
+													familyStatus=detailsBean.getFamilyStatus();
+													culture = detailsBean.getCulture();
+													height = detailsBean.getHeight();
+													weight = detailsBean.getWeight();
+													built = detailsBean.getBuilt();
+													complexion = detailsBean.getComplexion();
+													diet= detailsBean.getDiet();
+													drink = detailsBean.getDrink() ;
+													smoke = detailsBean.getSmoke();
+													about = detailsBean.getAbout();
+													education = detailsBean.getEducation();
+													profession = detailsBean.getProfession();
+													income = detailsBean.getIncome();
+													visa = detailsBean.getVisaStatus();
+													
+													
+												}
+										 
+										 
+									 }
+									 
+									 
 								}
 								if(request.getAttribute(contentPage.MODIFYOBJ)!=null){
 									bean = (memberBean)request.getAttribute(contentPage.MODIFYOBJ);

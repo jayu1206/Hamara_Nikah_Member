@@ -184,7 +184,7 @@ a{
 .age-block select{
     background: transparent;
     border:solid 1px #fff;
-    color: #fff;
+    /* color: #fff; */
     font-size: 22px;
     padding:3px 10px 3px 5px;
     border-radius: 5px;

@@ -269,9 +269,9 @@ public class ContentServlet extends HttpServlet {
 		if(key!=null){
 			if(request.getParameter("key").equals("searchMember")){
 				
-				adminMaintenance.getInstance().seachMember(request);
-				request.setAttribute(contentPage.CONTENT_PAGE, "/member/searchMember.jsp");
-				rd=request.getRequestDispatcher("/index.jsp");  
+				memberMaintenance.getInstance().seachMember(request);
+				//request.setAttribute(contentPage.CONTENT_PAGE, "/member/searchMember.jsp");
+				rd=request.getRequestDispatcher("/MemberLogin.jsp");  
 				rd.forward(request, response); 
 				
 			}

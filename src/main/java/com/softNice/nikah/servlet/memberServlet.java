@@ -142,6 +142,7 @@ public class memberServlet extends HttpServlet {
 			}
 			if (request.getParameter("key").equals("updateProfile")){
 				
+				adminMaintenance.getInstance().getAllCountry(request);
 				request.setAttribute(contentPage.CONTENT_PAGE, "/memberOtherDetailsHome.jsp");				
 				
 				rd=request.getRequestDispatcher("/memberIndex.jsp");  
@@ -253,7 +254,7 @@ public class memberServlet extends HttpServlet {
 				if(obj.getErrorCode()!=0){
 					request.setAttribute(contentPage.CONTENT_PAGE, "/memberOtherDetailsHome.jsp");
 				}else{
-					request.setAttribute(contentPage.CONTENT_PAGE, "/memberHome.jsp");
+					request.setAttribute(contentPage.CONTENT_PAGE, "/memberDashboard.jsp");
 				}
 				
 				rd=request.getRequestDispatcher("/memberIndex.jsp");  

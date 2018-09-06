@@ -1,495 +1,420 @@
-<%@page import="com.softNice.nikah.beans.memberPlanBean"%>
+<!DOCTYPE html>
+<%@ page isELIgnored="true" %>
+<%@page import="com.softNice.nikah.maintenance.adminMaintenance"%>
+<%@page import="com.softNice.nikah.beans.countryBean"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="org.codehaus.jackson.map.ObjectMapper"%>
-<%@page import="com.softNice.nikah.constent.contentPage"%>
 <%@page import="com.google.gson.Gson"%>
+<%@page import="org.codehaus.jackson.map.ObjectMapper"%>
 <%@page import="com.softNice.nikah.beans.generalSettingBean"%>
 <%@page import="com.softNice.nikah.beans.settingBean"%>
+<%@page import="com.softNice.nikah.constent.contentPage"%>
+<%@page import="com.softNice.nikah.constent.ErrorMsg"%>
+<%@page import="com.softNice.nikah.beans.memberStoryBean"%>
+<html lang="en">
+    <head>
+        <!-- HTML Variables -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-<%
+        <link rel="apple-touch-icon" sizes="76x76" href="memberCSS/images/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="memberCSS/images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="memberCSS/images/favicon/favicon-16x16.png">
+        <link rel="manifest" href="memberCSS/images/favicon/site.webmanifest">
+        <meta name="application-name" content="BBRadio">
+        <!--Theme CSS-->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">       
+        <link rel="stylesheet" href="memberCSS/plugin/bootstrap/bootstrap.min.css" type="text/css"/>
+        <link rel="stylesheet" href="memberCSS/plugin/owl-carousel/owl.carousel.css" type="text/css"/>
+        <link rel="stylesheet" href="memberCSS/font/font-awesome.css" type="text/css"/>
+        <link href="memberCSS/css/style.css" rel="stylesheet" type="text/css"/>
+        
 
-ArrayList<memberPlanBean> list=new ArrayList<memberPlanBean>();
-if(request.getAttribute(contentPage.MEMBERPLANOBJ)!=null){
-	list = (ArrayList<memberPlanBean>)request.getAttribute(contentPage.MEMBERPLANOBJ);
-}
-%>
-
-<div class="main-content">
-				<div class="main-content-inner">
-					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
-						<ul class="breadcrumb">
-							<li>
-								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="#">Home</a>
-							</li>
-							<li class="active">Dashboard</li>
-						</ul><!-- /.breadcrumb -->
-
-						<div class="nav-search" id="nav-search">
-							<form class="form-search">
-								<span class="input-icon">
-									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-									<i class="ace-icon fa fa-search nav-search-icon"></i>
-								</span>
-							</form>
-						</div><!-- /.nav-search -->
-					</div>
-
-					<div class="page-content">
-					<!-- 	<div class="ace-settings-container" id="ace-settings-container">
-							<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-								<i class="ace-icon fa fa-cog bigger-130"></i>
-							</div>
-
-							<div class="ace-settings-box clearfix" id="ace-settings-box">
-								<div class="pull-left width-50">
-									<div class="ace-settings-item">
-										<div class="pull-left">
-											<select id="skin-colorpicker" class="hide">
-												<option data-skin="no-skin" value="#438EB9">#438EB9</option>
-												<option data-skin="skin-1" value="#222A2D">#222A2D</option>
-												<option data-skin="skin-2" value="#C6487E">#C6487E</option>
-												<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-											</select>
-										</div>
-										<span>&nbsp; Choose Skin</span>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />
-										<label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />
-										<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />
-										<label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" />
-										<label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />
-										<label class="lbl" for="ace-settings-add-container">
-											Inside
-											<b>.container</b>
-										</label>
-									</div>
-								</div>/.pull-left
-
-								<div class="pull-left width-50">
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />
-										<label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />
-										<label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />
-										<label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
-									</div>
-								</div>/.pull-left
-							</div>/.ace-settings-box
-						</div>/.ace-settings-container -->
-
-						<div class="page-header">
-							<h1>
-								Dashboard
-								<small>
-									<i class="ace-icon fa fa-angle-double-right"></i>
-									overview &amp; stats
-								</small>
-							</h1>
-						</div><!-- /.page-header -->
-
-						<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
-								<!-- <div class="alert alert-block alert-success">
-									<button type="button" class="close" data-dismiss="alert">
-										<i class="ace-icon fa fa-times"></i>
-									</button>
-
-									<i class="ace-icon fa fa-check green"></i>
-
-									Welcome to
-									<strong class="green">
-										Ace
-										<small>(v1.4)</small>
-									</strong>,	
-								</div> -->
-
-								<div class="row">
-									<div class="space-6"></div>
- 
-					
-									<div class="vspace-12-sm"></div>
-
-						
-								</div><!-- /.row -->
-								
-									<div class="col-xs-6 col-sm-3 pricing-box">
-										<div class="widget-box widget-color-red3">
-											<div class="widget-header">
-												<h5 class="widget-title bigger lighter">Members</h5>
-											</div>
-
-											<div class="widget-body">
-												<div class="widget-main">
-													
-													<table id="dynamic-table" class="table table-striped table-bordered table-hover">
-
-													<thead>
-														<tr>
-															<th>Specification</th>
-															<th>Result</th>
-															<th>Link</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>Total</td>
-															<td>50 Members</td>
-															<td><a href="#">View </a></td>
-														</tr>
-														<tr>
-															<td>Active</td>
-															<td>49 Members</td>
-															<td><a href="#">View </a></td>
-														</tr>
-														<tr>
-															<td>Inactive</td>
-															<td>1 Members</td>
-															<td><a href="#">View </a></td>
-														</tr>
-													</tbody>
-
-													</table>
-												</div>
-
-												
-											</div>
-										</div>
-									</div>
-									
-										<div class="col-xs-6 col-sm-3 pricing-box">
-										<div class="widget-box widget-color-grey">
-											<div class="widget-header">
-												<h5 class="widget-title bigger lighter">Orders</h5>
-											</div>
-
-											<div class="widget-body">
-												<div class="widget-main">
-													
-													<table id="dynamic-table" class="table table-striped table-bordered table-hover">
-
-													<thead>
-														<tr>
-															<th>Specification</th>
-															<th>Result</th>
-															<th>Link</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>Total</td>
-															<td>82 Members</td>
-															<td><a href="#">View </a></td>
-														</tr>
-														<tr>
-															<td>Paid</td>
-															<td>79 Members</td>
-															<td><a href="#">View </a></td>
-														</tr>
-														<tr>
-															<td>Unpaid</td>
-															<td>3 Members</td>
-															<td><a href="#">View </a></td>
-														</tr>
-													</tbody>
-
-													</table>
-												</div>
-
-												
-											</div>
-										</div>
-									</div>
-									
-									
-									
-										<div class="col-xs-6 col-sm-3 pricing-box">
-										<div class="widget-box widget-color-blue">
-											<div class="widget-header">
-												<h5 class="widget-title bigger lighter">Gender</h5>
-											</div>
-
-											<div class="widget-body">
-												<div class="widget-main">
-													
-													<table id="dynamic-table" class="table table-striped table-bordered table-hover">
-
-													<thead>
-														<tr>
-															<th>Specification</th>
-															<th>Result</th>
-															<th>Link</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>Total</td>
-															<td>50 Members</td>
-															<td><a href="#">View </a></td>
-														</tr>
-														<tr>
-															<td>Groom (Male)</td>
-															<td>30 Members</td>
-															<td><a href="#">View </a></td>
-														</tr>
-														<tr>
-															<td>Bride (Female)</td>
-															<td>20 Members</td>
-															<td><a href="#">View </a></td>
-														</tr>
-													</tbody>
-
-													</table>
-												</div>
-
-												
-											</div>
-										</div>
-									</div>
-									
-										<div class="col-xs-6 col-sm-3 pricing-box">
-										<div class="widget-box widget-color-orange">
-											<div class="widget-header">
-												<h5 class="widget-title bigger lighter">Membership Plan</h5>
-											</div>
-
-											<div class="widget-body">
-												<div class="widget-main">
-													
-													<table id="dynamic-table" class="table table-striped table-bordered table-hover">
-
-													<thead>
-														<tr>
-															<th>Specification</th>
-															<th>Result</th>
-															<th>Link</th>
-														</tr>
-													</thead>
-													<tbody>
-														
-														<tr>
-															<td>Free</td>
-															<td>47 Members</td>
-															<td><a href="#">View </a></td>
-														</tr>
-														<tr>
-															<td>Silver</td>
-															<td>3 Members</td>
-															<td><a href="#">View </a></td>
-														</tr>
-														<tr>
-															<td>Gold</td>
-															<td>4 Members</td>
-															<td><a href="#">View </a></td>
-														</tr>
-														<tr>
-															<td>Dimond</td>
-															<td>28 Members</td>
-															<td><a href="#">View </a></td>
-														</tr>
-														<tr>
-															<td>Pletinum</td>
-															<td>0 Members</td>
-															<td><a href="#">View </a></td>
-														</tr>
-													</tbody>
-
-													</table>
-												</div>
-
-												
-											</div>
-										</div>
-									</div>
-									
-									<h4 class="header blue bolder smaller"> &nbsp;</h4>
-									
-<%if(list.size()>0){  %>
-					<div class="row">
-				
-						<div class="col-xs-4 col-sm-2 pricing-span-header">
-										<div class="widget-box transparent">
-											<div class="widget-header">
-												<h5 class="widget-title bigger lighter">Package Name</h5>
-											</div>
-
-											<div class="widget-body">
-												<div class="widget-main no-padding">
-													<ul class="list-unstyled list-striped pricing-table-header">
-														<li>Creadit</li>
-														<li>Plan Validity</li>
-														<li>Order</li>
-														<li>Print view</li>
-														<li>Photo Upload</li>
-														<li>Horoscope Upload</li>
-														<li>Horoscope View</li>
-														<li>Video Upload</li>
-														<li>Protect Photo</li>
-														<li>Bookmark</li>
-														<li>Messaging</li>
-														<li>Service Tax</li>
-														<li>Plan Charges</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-8 col-sm-9 pricing-span-body">
-									<%  for(memberPlanBean plan: list){
-									
-									String str="";
-									if(plan.getPlanName().equalsIgnoreCase("free")){
-										str="red3";
-									}
-									if(plan.getPlanName().equalsIgnoreCase("Dimond")){
-										str="orange";
-									}
-									
-									if(plan.getPlanName().equalsIgnoreCase("Gold")){
-										str="blue";								
-									}
-									if(plan.getPlanName().equalsIgnoreCase("Platinum")){
-										str="green";	
-									}
-									if(plan.getPlanName().equalsIgnoreCase("Silver")){
-										str="grey";
-									}
-									
-									%>
-									
-										
-										<div class="pricing-span">
-											
-											<div class="widget-box pricing-box-small widget-color-<%=str %>">
-												<div class="widget-header" align="center" >
-													<h5 class="widget-title bigger lighter"  ><%=plan.getPlanName() %></h5>
-												</div>
-
-												<div class="widget-body">
-													<div class="widget-main no-padding">
-														<ul class="list-unstyled list-striped pricing-table">
-															<li> <%=plan.getCredits() %></li>
-															<li> <%=plan.getPlanValidity() + " Days"  %> </li>
-															<li> <%=plan.getOrder() %> </li>
-														
-														<%if(plan.isPrintedView()){ %>
-															<li><i class=" green ace-icon fa fa-check-circle"></i></li>
-														<%}else{ %>
-															<li><i class="red ace-icon fa fa-times-circle"></i></li>
-														<%} %>
-														
-														<%if(plan.isPhotoUpload()){ %>
-															<li><i class=" green ace-icon fa fa-check-circle"></i></li>
-														<%}else{ %>
-															<li><i class="red ace-icon fa fa-times-circle"></i></li>
-														<%} %>
-														
-														<%if(plan.isHoroscopeUpload()){ %>
-															<li><i class=" green ace-icon fa fa-check-circle"></i></li>
-														<%}else{ %>
-															<li><i class="red ace-icon fa fa-times-circle"></i></li>
-														<%} %>
-														
-														<%if(plan.isHoroscopeView()){ %>
-															<li><i class=" green ace-icon fa fa-check-circle"></i></li>
-														<%}else{ %>
-															<li><i class="red ace-icon fa fa-times-circle"></i></li>
-														<%} %>
-														
-														<%if(plan.isVideoUpload()){ %>
-															<li><i class=" green ace-icon fa fa-check-circle"></i></li>
-														<%}else{ %>
-															<li><i class="red ace-icon fa fa-times-circle"></i></li>
-														<%} %>
-														
-														<%if(plan.isProtectPhoto()){ %>
-															<li><i class=" green ace-icon fa fa-check-circle"></i></li>
-														<%}else{ %>
-															<li><i class="red ace-icon fa fa-times-circle"></i></li>
-														<%} %>
-														
-														<%if(plan.isBookmark()){ %>
-															<li><i class=" green ace-icon fa fa-check-circle"></i></li>
-														<%}else{ %>
-															<li><i class="red ace-icon fa fa-times-circle"></i></li>
-														<%} %>
-														
-														<%if(plan.isMessaging()){ %>
-															<li><i class=" green ace-icon fa fa-check-circle"></i></li>
-														<%}else{ %>
-															<li><i class="red ace-icon fa fa-times-circle"></i></li>
-														<%} %>
-														
-														<%if(plan.isServiceTex()){ %>
-															<li><i class=" green ace-icon fa fa-check-circle"></i></li>
-														<%}else{ %>
-															<li><i class="red ace-icon fa fa-times-circle"></i></li>
-														<%} %>
+		
 	
-														<li><div class="price">
-															<span class="label label-lg label-inverse arrowed-in arrowed-in-right">
-																<small><%=plan.getPlanCharges() + " Rs" %></small>
-															</span>
-														</div></li>
-															
-														</ul>
+		
+        <!-- SEO -->
+        <meta name="description" content="" />
+        <title>Hamara Nikah</title>
+    </head>
+    
+     <%
+    
+    
+    
+    
+    			adminMaintenance.getInstance().getAllCountry(request);
+    
+				
+				 String str="";
+				
+				settingBean settingbean= null;
+				generalSettingBean mailbean= new generalSettingBean();
+				if(getServletContext().getAttribute(contentPage.SETTING)!=null){
+					settingbean = (settingBean) getServletContext().getAttribute(contentPage.SETTING);
+					
+					ObjectMapper mapperObj = new ObjectMapper();
+					if(settingbean.getValue()!=null){
+						mailbean = new Gson().fromJson(settingbean.getValue(),generalSettingBean.class);
+					}
+					
+				}
+				
+				ArrayList<countryBean> countryList=new ArrayList<countryBean>();
+				if(request.getAttribute(contentPage.COUNTRYOBJ)!=null){
+					countryList = (ArrayList<countryBean>)request.getAttribute(contentPage.COUNTRYOBJ);
+				}
+				
+		
+				
+				ArrayList<memberStoryBean> storyList=new ArrayList<memberStoryBean>();				
+			
+				if(getServletContext().getAttribute(contentPage.STORIES)!=null){
+					storyList = (ArrayList<memberStoryBean>) getServletContext().getAttribute(contentPage.STORIES);
+					
+				}
+		%>
+		
+		
+		
+    <body>
+        <!-- Header Starts  -->
+        <header class="header">
+            <div class="container">
+                <div class="top-header">
+                    <div class="top-left float-left">
+                        <a href="tel:01987654321"><i class="fa fa-phone"></i><span>01-987654321</span></a>
+                        <a href="mailto:info@hamaranikah.com"><i class="fa fa-envelope"></i><span>info@hamaranikah.com</span> </a>
+                    </div>
+                    <div class="top-left float-right">
+                        <a href="javascript:;">About</a>
+                        <a href="javascript:;"><i class="fa fa-question-circle"></i>Help</a>
+                    </div>
+                </div>
+            </div>
+            <div class="main-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <a href="javascript:;" class="logo">
+                                <img src="memberCSS/images/logo.png" alt="logo"/>
+                            </a>
+                        </div>
+                       <!--  <div class="col-lg-7">
+                            <div class="login-form">
+                                <form action="memberServlet" method="post" name="memberForm1" id="memberForm1" class="float-none float-lg-right" >
+                                <input type="hidden" id="key" name="key" value="" />
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" placeholder="Email"/>
+                                        <input type="email" class="form-control" placeholder="Email"  id="txtUserName" name="txtUserName"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" placeholder="Password"/>
+                                        <input type="password" class="form-control" placeholder="Password"  id="txtPsw" name="txtPsw"  />
+                                        <a href="javascript:;">Forgot your Password?</a>
+                                    </div>
+                                    <input type="submit" class="btn" value="login" id="btnSubmit"  name="btnSubmit" />
+                                </form>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="find-partner-section">
+            <div class="container">
+                <h2>Find the one who completes you</h2>
+                <form action=""  class="partner-form">
+                    <div class="radio-block">
+                        <label class="radio inline"> 
+                            <input type="radio" name="sex" value="Bride" checked="checked">
+                            <span>Bride </span> 
+                        </label>
+                        <label class="radio inline"> 
+                            <input type="radio" name="sex" value="Groom">
+                            <span>Groom</span> 
+                        </label>
+                    </div>
+                    <div class="age-block">
+                        <div class="form-detail">
+                            <label>Age</label>
+                            <select>
+                                <option selected="">18</option>
+                                <option>19</option>
+                                <option>20</option> 
+                                <option>21</option>
+                                <option>22</option>
+                                <option>23</option>
+                                <option>24</option>
+                                <option>25</option>
+                                <option>26</option>
+                                <option>27</option>
+                                <option>28</option>
+                                <option>29</option>
+                                <option>30</option>
+                            </select>
+                        </div>
+                        <div class="form-detail">
+                            <label>To</label>
+                            <select>
+                                <option selected="">18</option>
+                                <option>19</option>
+                                <option>20</option> 
+                                <option>21</option>
+                                <option>22</option>
+                                <option>23</option>
+                                <option>24</option>
+                                <option>25</option>
+                                <option>26</option>
+                                <option>27</option>
+                                <option>28</option>
+                                <option>29</option>
+                                <option>30</option>
+                            </select>
+                        </div>
+                        <div class="form-detail">
+                            <label id="mother-tounge">Mother Tounge</label>
+                            <select>
+                                <option selected="">English</option>
+                                <option>English</option>
+                                <option>English</option><option>English</option>
+                                <option>English</option>
+                            </select>
+                        </div>
+                        <div class="form-detail">
+                            <label id="sect">Sect</label>
+                            <select>
+                                <option selected="">Sect</option>
+                                <option>Sect</option>
+                                <option>Sect</option>
+                                <option>Sect</option>
+                                <option>Sect</option>
 
-													</div>
+                            </select>
+                        </div>                       
+                        <div class="form-detail">
+                            <label>Division</label>
+                            <select>
+                                <option selected="">Division</option>
+                                <option>Division</option>
+                                <option>Division</option>
+                                <option>Division</option>
+                                <option>Division</option>
+                            </select>
+                        </div>
+                        <input type="submit" class="btn btn-white" value="search"/>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="our-services-section">
+            <h1>Your partner search just got better with <span>Hamara nikah</span></h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="our-service-block">
+                            <div class="our-service-img">
+                                <i class="fa fa-edit"></i>
+                            </div>
+                            <div class="services-content">
+                                <h3>Sign up</h3>
+                                <p>Register for free and put up your profile</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="our-service-block">
+                            <div class="our-service-img">
+                                <i class="fa fa-group"></i>
+                            </div>
+                            <div class="services-content">
+                                <h3>Connect</h3>
+                                <p>Select & Connect with Matches you like.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="our-service-block">
+                            <div class="our-service-img">
+                                <i class="fa fa-comments-o"></i>
+                            </div>
+                            <div class="services-content">
+                                <h3>Interact</h3>
+                                <p>Become a Premium Member & Start a conversation  </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--  Success Stories -->
+    <section class="success-story-section">
+            <h1>Success Stories</h1>
+            <div class="container">               
+                <div class="success-story-slider owl-carousel">
+                
 
-													<div>
-														<a href="#" class="btn btn-block btn-sm btn-danger">
-															<span>Buy</span>
-														</a>
-													</div>
-												</div>
-											</div>
-										</div>
+				<%
+					for (memberStoryBean storyBean : storyList) {
+						String path[] = storyBean.getImgUrl().toString().split("temp");
+						String finalPath = path[1];															
+						String fileName = finalPath.substring(finalPath.lastIndexOf("\\")+1);
+		        %>
+				<div class="success-story-block">
+                        <div class="story-image">
+                           <%--  <img src="<%="webapp/temp/"+fileName %>" alt=""/> --%>
+                             <img src=<%="http://localhost:8085/SoftNice_Hamara_Nikah/webapp/temp/"+fileName%> alt="Image not available"/>
+                            
+                        </div>
+                        <div class="success-story-content">
+                            <p><%=storyBean.getSuccessStory() %></p>
+                            <h4>- <%=storyBean.getBrideName() %> & <%=storyBean.getGroomName() %></h4>
+                        </div>                         
+                    </div>
+                 <%
+						}
+				 %>
 
-								<%} %>
+                    <!-- <div class="success-story-block">
+                        <div class="story-image">
+                            <img src="memberCSS/images/story2.png" alt=""/>
+                        </div>
+                        <div class="success-story-content">
+                            <p>Thank you Muslim Matrimony for helping me find perfect match.</p>
+                            <h4>- Shahana & Sajin</h4>
+                        </div>                         
+                    </div>
+                    <div class="success-story-block">
+                        <div class="story-image">
+                            <img src="memberCSS/images/story1.png" alt=""/>
+                        </div>
+                        <div class="success-story-content">
+                            <p>Thank you Muslim Matrimony for helping me find perfect match.</p>
+                            <h4>- Shahana & Sajin</h4>
+                        </div>                         
+                    </div> -->
+                </div>
+            </div>
+        </section>
+        <!-- Recently Joined Section Starts  -->
+        <section class="recently-joined-section">
+            <div class="container">
+                <h2>Recently Joined....</h2>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="joined-block">
+                            <div class="joined-member-image">
+                                <img src="memberCSS/images/join1.png" alt=""/>
+                                <h4>Loremm Ipsum</h4>
+                            </div>
+                            <div class="joined-member-info">
+                                <h3>Lorem Ipsum</h3>
+                                <p>Age:26</p>
+                                <p>City:Vadodara</p>
+                                <a href="javascrupt:;" class="btn">contact me</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="joined-block">
+                            <div class="joined-member-image">
+                                <img src="memberCSS/images/join2.png" alt=""/>
+                                <h4>Loremm Ipsum</h4>
+                            </div>
+                            <div class="joined-member-info">
+                                <h3>Lorem Ipsum</h3>
+                                <p>Age:26</p>
+                                <p>City:Vadodara</p>
+                                <a href="javascrupt:;" class="btn">contact me</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="joined-block">
+                            <div class="joined-member-image">
+                                <img src="memberCSS/images/join3.png" alt=""/>
+                                <h4>Loremm Ipsum</h4>
+                            </div>
+                            <div class="joined-member-info">
+                                <h3>Lorem Ipsum</h3>
+                                <p>Age:26</p>
+                                <p>City:Vadodara</p>
+                                <a href="javascrupt:;" class="btn">contact me</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Story Block Starts  -->
+        <section class="story-section">
+            <div class="container">
+                <div class="get-start-block">
+                    <h3>Your story is waiting to open!</h3>
+                    <a href="javascript:;" class="btn transpertant-btn">get started</a>
+                </div>
+            </div>
+        </section>
+        <!-- Footer Starts  -->
+        <footer>
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="footer-block">
+                                <h3>About Hamara Nikah</h3>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="footer-block">
+                                <h3>GENERAL LINK</h3>
+                                <a href="javascript:;">Career</a>
+                                <a href="javascript:;">Privacy & Policy</a>                                
+                                <a href="javascript:;">Terms & Condition</a>
+                                <a href="javascript:;">Case Studies</a>
+                                <a href="javascript:;">FAQs</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="footer-block">
+                                <h3>LATEST POST</h3>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum h</p>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum h</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="footer-block">
+                                <h3>FOLLOW US!</h3>
+                                <a href="javascript:;">Linkedin</a>
+                                <a href="javascript:;">Facebook</a>
+                                <a href="javascript:;">Twitter</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p><i class="fa fa-copyright"></i> - All Rights With <a href="javascript:;">Hamra Nikah</a></p>
+            </div>
+        </footer>
+        
+        
+		 
+		
+		
+        <script type="text/javascript" src="memberCSS/js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="memberCSS/plugin/bootstrap/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="memberCSS/plugin/owl-carousel/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="memberCSS/js/default.js"></script>
+        
+ 
+        
 
-									</div>
-							</div>
-							
-							
-							<%} %>
-							
-							
-							
-									
-									
-									
-							
-							
-							
-								<!-- PAGE CONTENT ENDS -->
-							</div><!-- /.col -->
-						</div><!-- /.row -->
-					</div><!-- /.page-content -->
-				</div>
-			</div><!-- /.main-content -->
+
+
+        
+        
+    </body>
+</html>
