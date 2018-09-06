@@ -140,6 +140,14 @@ public class memberServlet extends HttpServlet {
 				rd=request.getRequestDispatcher("/viewStories.jsp");  
 				rd.forward(request, response);
 			}
+			if (request.getParameter("key").equals("updateProfile")){
+				
+				request.setAttribute(contentPage.CONTENT_PAGE, "/memberOtherDetailsHome.jsp");				
+				
+				rd=request.getRequestDispatcher("/memberIndex.jsp");  
+				rd.forward(request, response); 
+					
+			}
 			
 			
 			
@@ -187,11 +195,11 @@ public class memberServlet extends HttpServlet {
 					request.getSession().setAttribute(contentPage.SETTING, getServletContext().getAttribute(contentPage.SETTING));
 					
 					if(bean.getDetails().size()==0){
-						request.setAttribute(contentPage.CONTENT_PAGE, "/memberOtherDetailsHome.jsp");
+						request.setAttribute(contentPage.CONTENT_PAGE, "/memberDashboard.jsp");
 						
 						//System.out.println("empty details page");
 					}else{
-						request.setAttribute(contentPage.CONTENT_PAGE, "/memberOtherDetailsHome.jsp");
+						request.setAttribute(contentPage.CONTENT_PAGE, "/memberDashboard.jsp");
 						//request.setAttribute(contentPage.CONTENT_PAGE, "/memberHome.jsp");
 					}
 					

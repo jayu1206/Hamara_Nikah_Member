@@ -102,6 +102,15 @@
 						<b class="arrow"></b>
 					</li>
 					
+					<li >
+						<a href="memberServlet?key=updateProfile">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> Update Profile </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+					
 					
 				<%-- 	<li class="">
 						<a href="#" class="dropdown-toggle">

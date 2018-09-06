@@ -271,6 +271,8 @@ public class ContentServlet extends HttpServlet {
 				
 				adminMaintenance.getInstance().seachMember(request);
 				request.setAttribute(contentPage.CONTENT_PAGE, "/member/searchMember.jsp");
+				rd=request.getRequestDispatcher("/index.jsp");  
+				rd.forward(request, response); 
 				
 			}
 			if(request.getParameter("key").equals("addMemberStory")){
@@ -376,10 +378,8 @@ public class ContentServlet extends HttpServlet {
 			}
 			
 		
-		}
+		}		
 		
-		rd=request.getRequestDispatcher("/index.jsp");  
-		rd.forward(request, response); 
 	}
 
 }
