@@ -143,11 +143,34 @@ public class memberServlet extends HttpServlet {
 			if (request.getParameter("key").equals("updateProfile")){
 				
 				request.setAttribute(contentPage.CONTENT_PAGE, "/memberOtherDetailsHome.jsp");				
+				rd=request.getRequestDispatcher("/memberIndex.jsp");  
+				rd.forward(request, response); 
+					
+			}
+			if (request.getParameter("key").equals("dashboard")){
+				
+				memberMaintenance.getInstance().getAllMemberPlan(request);
+				request.setAttribute(contentPage.CONTENT_PAGE, "/memberDashboard.jsp");		
+				rd=request.getRequestDispatcher("/memberIndex.jsp");  
+				rd.forward(request, response); 
+					
+			}
+			
+			if (request.getParameter("key").equals("requestPlan")){
+				
+				ErrorMsg obj=(ErrorMsg) memberMaintenance.getInstance().requestForPlan(request);
+				request.setAttribute("error", obj);
+				if(obj.getErrorCode()!=0){
+					request.setAttribute(contentPage.CONTENT_PAGE, "/memberDashboard.jsp");
+				}else{
+					request.setAttribute(contentPage.CONTENT_PAGE, "/memberDashboard.jsp");
+				}
 				
 				rd=request.getRequestDispatcher("/memberIndex.jsp");  
 				rd.forward(request, response); 
 					
 			}
+			
 			
 			
 			

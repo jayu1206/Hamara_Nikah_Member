@@ -781,5 +781,34 @@ public class memberMaintenance {
 		
 	}
 
+	public ErrorMsg requestForPlan(HttpServletRequest request) {
+		
+		// TODO Auto-generated method stub
+		Session session=null;
+		try {
+			
+			session=HibernateFactory.openSession();
+			//session.save(bean);
+			session.flush();
+			return new ErrorMsg(0, "Data added sucessfully");
+
+		} catch (Exception e) {
+			log.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
+			return new ErrorMsg(1, "Data Not added..");
+			  
+		} finally {
+			try {
+				HibernateFactory.close(session);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+	
+	
+	}
+
 
 }

@@ -1,3 +1,5 @@
+<%@page import="com.softNice.nikah.utility.EncrypitDecrypit"%>
+<%@page import="com.softNice.nikah.beans.memberBean"%>
 <%@page import="com.softNice.nikah.beans.dashboard"%>
 <%@page import="com.softNice.nikah.beans.memberPlanBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -19,6 +21,8 @@ if(request.getSession().getAttribute(contentPage.DASHBOARD)!=null){
 	dashboardList = (ArrayList<dashboard>) request.getSession().getAttribute(contentPage.DASHBOARD);
 	 
 }
+memberBean bean= new memberBean();
+bean = (memberBean)request.getSession().getAttribute(contentPage.USERSOBJ);
 
 int totalMember=0;
 int active=0;
@@ -234,9 +238,14 @@ for(dashboard daBean : dashboardList){
 														</ul>
 
 													</div>
+<%
 
+	String memberId = EncrypitDecrypit.encrypt(bean.getMemberId(), "password");
+	String pln = String.valueOf(plan.getPlanId());
+	String planId = EncrypitDecrypit.encrypt(pln, "password");
+%> 
 													<div>
-														<a href="#" class="btn btn-block btn-sm btn-danger">
+														<a href="memberServlet?key=requestPlan&memberId=<%=memberId %>&planID=<%=planId %>" class="btn btn-block btn-sm btn-danger">
 															<span>Buy</span>
 														</a>
 													</div>

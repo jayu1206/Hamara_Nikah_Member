@@ -54,7 +54,7 @@
 
 				<ul class="nav nav-list">
 					<li class="active">
-						<a href="ContentServlet?key=dashboard">
+						<a href="memberServlet?key=dashboard">
 							<i class="menu-icon fa fa-tachometer"></i>
 							<span class="menu-text"> Dashboard </span>
 						</a>
