@@ -31,7 +31,7 @@
 
 						<div class="page-header">
 						
-						<table width="100%">
+						<table>
 							<tr>
 								<th><h1>Upload Photos</h1></th>
 							</tr>
@@ -39,7 +39,7 @@
 							
 						</div><!-- /.page-header -->
 
-						<div class="row">
+						<div class="row"  style="width: 800px;">
 							
 							<div class="col-md-12">
 								<!-- PAGE CONTENT BEGINS -->
@@ -79,17 +79,17 @@
 
 										<div class="dz-success-mark">
 											<span class="fa-stack fa-lg bigger-150">
-												<i class="fa fa-circle fa-stack-2x white"></i>
+												<!-- <i class="fa fa-circle fa-stack-2x white"></i>
 
-												<i class="fa fa-check fa-stack-1x fa-inverse green"></i>
+												<i class="fa fa-check fa-stack-1x fa-inverse green"></i> -->
 											</span>
 										</div>
 
 										<div class="dz-error-mark">
 											<span class="fa-stack fa-lg bigger-150">
-												<i class="fa fa-circle fa-stack-2x white"></i>
+												<!-- <i class="fa fa-circle fa-stack-2x white"></i>
 
-												<i class="fa fa-remove fa-stack-1x fa-inverse red"></i>
+												<i class="fa fa-remove fa-stack-1x fa-inverse red"></i> -->
 											</span>
 										</div>
 									</div>
@@ -120,7 +120,7 @@
 												<img width="150" height="150" alt="150x150" src="<%="galleryImage/"+finalPath %>" />
 											</a>
 
-											<div class="tags">
+											<!-- <div class="tags">
 												<span class="label-holder">
 													<span class="label label-info">breakfast</span>
 												</span>
@@ -136,10 +136,10 @@
 												<span class="label-holder">
 													<span class="label label-warning arrowed-in">diet</span>
 												</span>
-											</div>
+											</div> -->
 
 											<div class="tools">
-												<a href="#">
+												<!-- <a href="#">
 													<i class="ace-icon fa fa-link"></i>
 												</a>
 
@@ -149,7 +149,7 @@
 
 												<a href="#">
 													<i class="ace-icon fa fa-pencil"></i>
-												</a>
+												</a> -->
 
 												<a href="#" onclick="deleteImageByPath('<%=bean.getMemberId()%>','<%=fileName%>','<%=count%>')">
 													<i class="ace-icon fa fa-times red"></i>

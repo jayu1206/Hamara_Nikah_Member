@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,8 +11,27 @@
 		<meta name="description" content="overview &amp; stats" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
-		<!-- bootstrap & fontawesome -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+	 <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+        <link rel="apple-touch-icon" sizes="76x76" href="memberCSS/images/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="memberCSS/images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="memberCSS/images/favicon/favicon-16x16.png">
+        <link rel="manifest" href="memberCSS/images/favicon/site.webmanifest">
+        <meta name="application-name" content="BBRadio">
+        <!--Theme CSS-->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">       
+        <link rel="stylesheet" href="memberCSS/plugin/bootstrap/bootstrap.min.css" type="text/css"/>
+        <link rel="stylesheet" href="memberCSS/plugin/owl-carousel/owl.carousel.css" type="text/css"/>
+        <link rel="stylesheet" href="memberCSS/font/font-awesome.css" type="text/css"/>
+        <link href="memberCSS/css/style.css" rel="stylesheet" type="text/css"/>
+        
+        
+        
+        <!-- bootstrap & fontawesome -->
+		<!-- <link rel="stylesheet" href="assets/css/bootstrap.min.css" /> -->
 		<link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 
 		<!-- page specific plugin styles -->
@@ -71,33 +91,41 @@
 		<script src="assets/js/jquery.hotkeys.index.min.js"></script>
 		<script src="assets/js/select2.min.js"></script>
 		
+		
+		
+		
 		<script type='text/javascript' src='dwr/engine.js'></script>
 		<script type='text/javascript' src='dwr/interface/softNiceUtilityData.js'></script>
 		<script type='text/javascript' src='dwr/util.js'></script>
-		<script src='js/softnice.js?v=" + Date.now() + "' type="text/javascript" charset="utf-8"></script>
-		
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
+		<script src='js/softnice.js?v=1007'  type="text/javascript" charset="utf-8"></script>
 		
 		
 </head>
-<body class="no-skin">
+<body>
 		
-		<div  style="width: 1200px; margin: 0px auto;  ">
+
 			<jsp:include page="/memberMain/header.jsp" flush="false"></jsp:include>
-			<div class="main-container ace-save-state" id="main-container"  >
-			<script type="text/javascript">
+		
+	<div class="main-container ace-save-state" id="main-container"  >
+			<!-- <script type="text/javascript">
 				try{ace.settings.loadState('main-container')}catch(e){}
-			</script>	
+			</script> -->
+			
+			<section class="recently-joined-section" >
 				
-			 <jsp:include page="/memberMain/menu.jsp" flush="false"></jsp:include> 
-			<jsp:include page="/memberMain/content.jsp" flush="false"></jsp:include>
+	        <div class="container">   
+	        	
+				<jsp:include page="/memberMain/menu.jsp" flush="false"></jsp:include>
+				<jsp:include page="/memberMain/content.jsp" flush="false"></jsp:include>
+			</div>
+			</section>
 			<jsp:include page="/memberMain/footer.jsp" flush="false"></jsp:include>
 				
 				
-	</div><!-- /.main-container -->
-	</div> 
+	 </div> <!-- /.main-container -->
+	
+	
+	
 
 		<!-- basic scripts -->
 
@@ -121,10 +149,33 @@
 		<![endif]-->
 		
 		<!-- ace scripts -->
+		<!-- <script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script> -->
+  <script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+		<script src="assets/js/bootstrap.min.js"></script>
+
+		<!-- ace scripts -->
 		<script src="assets/js/ace-elements.min.js"></script>
 		<script src="assets/js/ace.min.js"></script>
-
+        <script src="assets/js/bootbox.js"></script>
+        
+        
 		<!-- inline scripts related to this page -->
+		  <!--  <script type="text/javascript" src="memberCSS/js/jquery-3.3.1.min.js"></script> -->
+        <script type="text/javascript" src="memberCSS/plugin/bootstrap/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="memberCSS/plugin/owl-carousel/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="memberCSS/js/default.js"></script>
+        
+        
+        
+      
+        
+        
+        
+        
+        
 		<script type="text/javascript">
 			jQuery(function($) {
 				$('.easy-pie-chart.percentage').each(function(){

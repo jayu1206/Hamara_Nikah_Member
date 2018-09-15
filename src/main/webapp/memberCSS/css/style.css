@@ -594,3 +594,7 @@ a{
         font-size: 27px;
     }
 }
+
+.nav>li>a {
+    padding: 10px 15px;
+}

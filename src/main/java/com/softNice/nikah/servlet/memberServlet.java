@@ -172,6 +172,13 @@ public class memberServlet extends HttpServlet {
 					
 			}
 			
+			if(request.getParameter("key").equals("searchMember")){
+				/*request.setAttribute(contentPage.CONTENT_PAGE, "/member/searchMember.jsp");*/
+				rd=request.getRequestDispatcher("/advanceSearch.jsp");  
+				rd.forward(request, response); 
+				
+			}
+			
 			
 			
 			
@@ -277,6 +284,7 @@ public class memberServlet extends HttpServlet {
 				if(obj.getErrorCode()!=0){
 					request.setAttribute(contentPage.CONTENT_PAGE, "/memberOtherDetailsHome.jsp");
 				}else{
+					memberMaintenance.getInstance().getAllMemberPlan(request);
 					request.setAttribute(contentPage.CONTENT_PAGE, "/memberDashboard.jsp");
 				}
 				

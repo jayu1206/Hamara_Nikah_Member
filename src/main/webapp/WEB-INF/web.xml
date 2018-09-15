@@ -6,6 +6,8 @@
     <listener-class>com.softNice.nikah.listner.listenerClass</listener-class>
   </listener>
   
+
+  
   <servlet>
   	<servlet-name>loginServlet</servlet-name>
   	<servlet-class>com.softNice.nikah.servlet.loginServlet</servlet-class>
@@ -29,7 +31,7 @@
   <servlet-mapping>
   	<servlet-name>FormServlet</servlet-name>
   	<url-pattern>/FormServlet</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> 
   
 
   <servlet>
@@ -51,13 +53,20 @@
   	<display-name>memberServlet</display-name>
   	<servlet-name>memberServlet</servlet-name>
   	<servlet-class>com.softNice.nikah.servlet.memberServlet</servlet-class>
-  </servlet>
-  <servlet>
+  </servlet> 
+ <servlet>
   	<description>
   	</description>
   	<display-name>UploadMaterial</display-name>
   	<servlet-name>UploadMaterial</servlet-name>
   	<servlet-class>com.softNice.nikah.servlet.UploadMaterial</servlet-class>
+  </servlet> 
+   <servlet>
+  	<description>
+  	</description>
+  	<display-name>contentMemberServlet</display-name>
+  	<servlet-name>contentMemberServlet</servlet-name>
+  	<servlet-class>com.softNice.nikah.servlet.contentMemberServlet</servlet-class>
   </servlet> 
   
     <servlet-mapping>
@@ -72,6 +81,10 @@
     	<servlet-name>UploadMaterial</servlet-name>
     	<url-pattern>/UploadMaterial</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>contentMemberServlet</servlet-name>
+    	<url-pattern>/contentMemberServlet</url-pattern>
+    </servlet-mapping> 
   
   
   <error-page>

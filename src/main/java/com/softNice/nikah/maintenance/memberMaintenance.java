@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.softNice.nikah.beans.UserBean;
 import com.softNice.nikah.beans.countryBean;
 import com.softNice.nikah.beans.generalSettingBean;
+import com.softNice.nikah.beans.interestMemberBean;
 import com.softNice.nikah.beans.memberBean;
 import com.softNice.nikah.beans.memberDetailsBean;
 import com.softNice.nikah.beans.memberPlanBean;
@@ -403,6 +404,13 @@ public class memberMaintenance {
 		}
 		details.setCulture(Integer.parseInt(request.getParameter("culture")));
 		
+		if (request.getParameter("motherTounge").equals("0") || request.getParameter("motherTounge").trim().length() == 0){
+			return new ErrorMsg(1, "Please select motherTounge");
+		}
+		details.setMotherTounge(Integer.parseInt(request.getParameter("motherTounge")));
+		
+		
+		
 		if (request.getParameter("height").equals("0") || request.getParameter("height").trim().length() == 0){
 			return new ErrorMsg(1, "Please select height");
 		}
@@ -462,20 +470,40 @@ public class memberMaintenance {
 		}
 		details.setVisaStatus(request.getParameter("visa"));
 		
+		if(Integer.parseInt(request.getParameter("txtOtherDetailId"))>0){
+			details.setId(Integer.parseInt(request.getParameter("txtOtherDetailId")));
+		}
 		
 		details.setMemberId(bean.getId());
+		
+		boolean flagCheck= dao.checkMemberOtherDetails(details.getMemberId());
 		
 		Set<memberDetailsBean> setlist=new HashSet<memberDetailsBean>();
 		setlist.add(details);
 		bean.setDetails(setlist);
 		request.getSession().setAttribute(contentPage.USERSOBJ,bean);
-		int flag = dao.insertMemberDetails(details);
+		request.getSession().setAttribute(contentPage.MEMBERS,bean);
 		
-		if(flag!=0){
-			return new ErrorMsg(2, "Internal Error");
+		
+		
+		if(flagCheck){
+			int flag = dao.updateMemberDetails(details);
+			
+			if(flag!=0){
+				return new ErrorMsg(2, "Internal Error");
+			}else{
+				flag = dao.updateMember(bean);
+			}
 		}else{
-			flag = dao.updateMember(bean);
+			int flag = dao.insertMemberDetails(details);
+			
+			if(flag!=0){
+				return new ErrorMsg(2, "Internal Error");
+			}else{
+				flag = dao.updateMember(bean);
+			}
 		}
+		
 		
 		return new ErrorMsg(0, "Done");
 		
@@ -786,6 +814,8 @@ public class memberMaintenance {
 		
 		int ageFrom=0,ageTo=0;
 		String gender="";
+		int motherToung = 0;
+		int country = 0;
 	
 		if(request.getParameter("ageFrom")!=null && request.getParameter("ageFrom").length()>0){
 			ageFrom = Integer.parseInt(request.getParameter("ageFrom"));
@@ -798,6 +828,11 @@ public class memberMaintenance {
 		if(request.getParameter("gender")!=null && request.getParameter("gender").length()>0){
 			gender =request.getParameter("gender");
 		}
+		/*if(request.getParameter("gender")!=null && request.getParameter("gender").length()>0){
+			
+		}*/
+		
+		
 			
 			
 		administratorDAO dao=new administratorImpl();
@@ -834,6 +869,44 @@ public class memberMaintenance {
 	
 	
 	
+	}
+
+	public String sendRequestInterested(int toMemberId, int fromMemberId) {
+		// TODO Auto-generated method stub
+		
+		memberDAO dao=new memberImpl();
+		interestMemberBean bean=new interestMemberBean();
+		bean.setFromMemberId(fromMemberId);
+		bean.setToMemberId(toMemberId);
+		bean.setRequestDate(new Date());
+		bean.setAcceptFlag(0);
+		bean.setStatus(true);
+		
+		boolean flag = dao.checkRequestedInterested(toMemberId,fromMemberId);
+		
+		if(flag){
+			return "Already Done";
+		}else{
+			int flag2 = dao.insertInterested(bean);
+			
+			if(flag2!=0){
+				return "Error";
+			}
+			
+			return "Sucess";
+		}
+		
+		 
+		
+	}
+
+	public void getRequestInterestedMembersList(HttpServletRequest request, int memberId) {
+		// TODO Auto-generated method stub
+		memberDAO dao = new memberImpl();
+		ArrayList<interestMemberBean> list = dao.getAllInterestedList(memberId);
+		request.setAttribute(contentPage.INTERESTEDLIST,list);
+	
+		
 	}
 
 

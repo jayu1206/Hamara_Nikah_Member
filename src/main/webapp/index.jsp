@@ -11,78 +11,24 @@
 		<meta name="description" content="overview &amp; stats" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
-		<!-- bootstrap & fontawesome -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+	 <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-		<!-- page specific plugin styles -->
-
-		<!-- text fonts -->
-		<link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" />
-
-		<!-- ace styles -->
-		<link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
-
-		<!--[if lte IE 9]>
-			<link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
-		<![endif]-->
-		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
-		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
-		
-
-		<script src="assets/js/jquery-2.1.4.min.js"></script>
-		
-		<link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css" />
-		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-		<![endif]-->
-
-		<!-- inline styles related to this page -->
-
-		<!-- ace settings handler -->
-		<script src="assets/js/ace-extra.min.js"></script>
-
-
-		
-		<script src="assets/js/jquery-ui.custom.min.js"></script>
-		<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="assets/js/jquery.easypiechart.min.js"></script>
-		<script src="assets/js/jquery.sparkline.index.min.js"></script>
-		<script src="assets/js/jquery.flot.min.js"></script>
-		<script src="assets/js/jquery.flot.pie.min.js"></script>
-		<script src="assets/js/jquery.flot.resize.min.js"></script>
-		<!-- page specific plugin styles -->
-		<link rel="stylesheet" href="assets/css/dropzone.min.css" />
-		<script src="assets/js/dropzone.min.js"></script>
-		
-		
-		<!-- page specific plugin styles -->
-		<link rel="stylesheet" href="assets/css/bootstrap-duallistbox.min.css" />
-		<link rel="stylesheet" href="assets/css/bootstrap-multiselect.min.css" />
-		<link rel="stylesheet" href="assets/css/select2.min.css" />
-		
-		<!-- page specific plugin scripts -->
-		<script src="assets/js/jquery.dataTables.min.js"></script>
-		<script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
-		<script src="assets/js/dataTables.buttons.min.js"></script>
-		<script src="assets/js/buttons.flash.min.js"></script>
-		<script src="assets/js/buttons.html5.min.js"></script>
-		<script src="assets/js/buttons.print.min.js"></script>
-		<script src="assets/js/buttons.colVis.min.js"></script>
-		<script src="assets/js/dataTables.select.min.js"></script>
-		
-
-	
-		<script src="assets/js/bootstrap-datepicker.min.js"></script>
-		<script src="assets/js/jquery.hotkeys.index.min.js"></script>
-		<script src="assets/js/select2.min.js"></script>
-		
-		<!-- page specific plugin scripts -->
-		<script src="assets/js/jquery.bootstrap-duallistbox.min.js"></script>
-		<script src="assets/js/jquery.raty.min.js"></script>
-		<script src="assets/js/bootstrap-multiselect.min.js"></script>
-		<script src="assets/js/select2.min.js"></script>
-		<script src="assets/js/jquery-typeahead.js"></script>
+        <link rel="apple-touch-icon" sizes="76x76" href="memberCSS/images/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="memberCSS/images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="memberCSS/images/favicon/favicon-16x16.png">
+        <link rel="manifest" href="memberCSS/images/favicon/site.webmanifest">
+        <meta name="application-name" content="BBRadio">
+        <!--Theme CSS-->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">       
+        <link rel="stylesheet" href="memberCSS/plugin/bootstrap/bootstrap.min.css" type="text/css"/>
+        <link rel="stylesheet" href="memberCSS/plugin/owl-carousel/owl.carousel.css" type="text/css"/>
+        <link rel="stylesheet" href="memberCSS/font/font-awesome.css" type="text/css"/>
+        <link href="memberCSS/css/style.css" rel="stylesheet" type="text/css"/>
+        
+        
 		
 		<script type='text/javascript' src='dwr/engine.js'></script>
 		<script type='text/javascript' src='dwr/interface/softNiceUtilityData.js'></script>
@@ -96,17 +42,17 @@
 
 			<jsp:include page="/main/header.jsp" flush="false"></jsp:include>
 		
-	<div class="main-container ace-save-state" id="main-container">
+	<!-- <div class="main-container ace-save-state" id="main-container"> -->
 			<script type="text/javascript">
 				try{ace.settings.loadState('main-container')}catch(e){}
 			</script>	
 				
-			<jsp:include page="/main/menu.jsp" flush="false"></jsp:include>
+			<%-- <jsp:include page="/main/menu.jsp" flush="false"></jsp:include> --%>
 			<jsp:include page="/main/content.jsp" flush="false"></jsp:include>
 			<jsp:include page="/main/footer.jsp" flush="false"></jsp:include>
 				
 				
-	</div><!-- /.main-container -->
+	<!-- </div> --><!-- /.main-container -->
 
 		<!-- basic scripts -->
 

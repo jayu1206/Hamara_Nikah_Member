@@ -56,6 +56,27 @@ function getCity(stateCode,cityCode){
     });
 }
 
+function sendInterested(toMemberId,fromMemberId){ 
+	
+	softNiceUtilityData.sendRequestInterested(toMemberId,fromMemberId,{
+		callback : function(str) 
+		{
+			 if(str == 'Sucess'){
+				 
+				 document.getElementById("requestResult").value = "0";
+				 return "0";
+				 
+			 }else{
+				 document.getElementById("requestResult").value = "1";
+				 return "1";
+			 }
+	       
+         } 
+    });
+	
+	//wait(2000);
+}
+
 function getEndDate(startDate,planId){
 	softNiceUtilityData.getEndDate(startDate,planId,{
 		callback : function(str) 

@@ -34,7 +34,9 @@
         <link rel="stylesheet" href="memberCSS/font/font-awesome.css" type="text/css"/>
         <link href="memberCSS/css/style.css" rel="stylesheet" type="text/css"/>
         
-        
+        <script language="JavaScript" type="text/javascript">
+window.history.forward(1);
+</script>
        
 
 <!-- 		
@@ -49,6 +51,7 @@
 		<script type='text/javascript' src='dwr/util.js'></script>
 		<script src='js/softnice.js?v=" + Date.now() + "' type="text/javascript" charset="utf-8"></script>
 		
+
 	
 		
         <!-- SEO -->
@@ -58,7 +61,10 @@
     
      <%
     
-    
+  /*   if(request.getSession().getAttribute(contentPage.MEMBERS)!=null){
+    	response.sendRedirect("/memberDashboard.jsp");
+    	
+    } */
     
      request.getSession().setAttribute(contentPage.MASTERMAPOBJ, getServletContext().getAttribute(contentPage.MASTERMAPOBJ));
      HashMap<Integer, String> map2 = new HashMap<Integer, String>();
@@ -80,12 +86,16 @@
 				
 				
 				
-				boolean sessionUserFlag= false;
+				/* boolean sessionUserFlag= false;
 				if(request.getSession().getAttribute(contentPage.MEMBERS)!=null){
 					
 					sessionUserFlag = true;
 					
-				}
+					RequestDispatcher rd = request.getRequestDispatcher("/memberDashboard.jsp");
+					rd.forward(request, response);
+					
+					
+				} */
 				
 				
 				settingBean settingbean= null;
@@ -107,16 +117,16 @@
 				
 				if(request.getAttribute(contentPage.ERROR)!=null){ 
 					
-					 firstName=request.getParameter("txtFirstName");
-					 lastName=request.getParameter("txtLastName");
+					 firstName=request.getParameter("txtFirstName")==null?"":request.getParameter("txtFirstName");
+					 lastName=request.getParameter("txtLastName")==null?"":request.getParameter("txtLastName");
 					 dob=request.getParameter("txtDob")==null?"":request.getParameter("txtDob");
 					 gender=request.getParameter("gender")==null?"":request.getParameter("gender");
 					 country=request.getParameter("country")!=null?Integer.parseInt(request.getParameter("country")):0;
 					 state=request.getParameter("state")!=null?Integer.parseInt(request.getParameter("state")):0;
 					 city=request.getParameter("city")!=null?Integer.parseInt(request.getParameter("city")):0;
-					 email=request.getParameter("txtEmail");
-					 psw=request.getParameter("txtPsw");
-					 maritalStatus = request.getParameter("maritalStatus");
+					 email=request.getParameter("txtEmail")==null?"":request.getParameter("txtEmail");
+					 psw=request.getParameter("txtPsw")==null?"":request.getParameter("txtPsw");
+					 maritalStatus = request.getParameter("maritalStatus")==null?"":request.getParameter("maritalStatus");
 					 
 					
 					str=((ErrorMsg)request.getAttribute(contentPage.ERROR)).getError();
@@ -158,13 +168,26 @@
             <div class="main-header">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-5">
+                       <div class="col-lg-5">
                             <a href="javascript:;" class="logo">
                                 <img src="memberCSS/images/logo.png" alt="logo"/>
                             </a>
-                        </div>
+                        </div> 
                         
-                        <% if(!sessionUserFlag){ %>
+                    	<%
+								  str="";  //Invalid Username or Password
+								if(request.getAttribute(contentPage.ERROR)!=null){ 
+									str=((ErrorMsg)request.getAttribute(contentPage.ERROR)).getError();
+									if(!str.equals("Invalid Username or Password")){
+										str ="";
+									}
+								} 
+											
+						%>
+														
+					
+                       
+                       
                         <div class="col-lg-7">
                             <div class="login-form">
                                 <form action="memberServlet" method="post" name="memberForm1" id="memberForm1" class="float-none float-lg-right" >
@@ -172,29 +195,34 @@
                                     <div class="form-group">
                                         <!-- <input type="email" class="form-control" placeholder="Email"/> -->
                                         <input type="email" class="form-control" placeholder="Email"  id="txtUserName" name="txtUserName"  />
+                                        <div style="color: white; padding-top: 5px;">	<%=str %>  </div>
                                     </div>
                                     <div class="form-group">
-                                        <!-- <input type="password" class="form-control" placeholder="Password"/> -->
                                         <input type="password" class="form-control" placeholder="Password"  id="txtPsw" name="txtPsw"  />
                                         <a href="javascript:;">Forgot your Password?</a>
+                                       
                                     </div>
                                     <input type="submit" class="btn" value="login" id="btnSubmit"  name="btnSubmit" />
                                 </form>
                             </div>
                         </div>
-                        <% }%>
+                  
+                       
                     </div>
                 </div>
             </div>
         </header>
+       
         <section class="registration-form-section">
             <div class="container">
                 <div class="row">
                     <div class="offset-lg-6 col-lg-6">
                         <div class="registration-form">
-                        	<% if(!sessionUserFlag){ %>
+                        
                             <h2>Perfect Place for your Perfect Matchs</h2>
                             <form action="memberServlet?key=newRegister" method="post" name="memberForm2" id="memberForm2">
+                          
+                            
                                 <h1>Registration FREE</h1>
                                  <div class="form-group">
                                     <label class="form-label">First Name</label>
@@ -319,11 +347,13 @@
                                 
                                 	<div align="center" style="color: red">
 														<%
-														  str="";
-														if(request.getAttribute(contentPage.ERROR)!=null){ 
-															str=((ErrorMsg)request.getAttribute(contentPage.ERROR)).getError();
-															
-														} 
+														  str="";  //Invalid Username or Password
+															if(request.getAttribute(contentPage.ERROR)!=null){ 
+																str=((ErrorMsg)request.getAttribute(contentPage.ERROR)).getError();
+																if(str.equals("Invalid Username or Password")){
+																	str ="";
+																}
+															} 
 														
 														
 														
@@ -332,13 +362,15 @@
 														<label><%=str %> </label>
 									
 								</div>
+								
                             </form>
-                            <%} %>
+                           
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+      
         <section class="find-partner-section">
             <div class="container">
                 <h2>Find the one who completes you</h2>
@@ -425,67 +457,7 @@
             </div>
         </section>
        
-      <% if(sessionUserFlag){ %>
-	        <!-- Search result content -->
-	         <%
-	         		if(request.getAttribute(contentPage.MEMBERSEARCH)!=null){
-	         			
-	         			ArrayList<memberBean> memberList = new ArrayList<memberBean>();
-	         			memberList = (ArrayList<memberBean>)request.getAttribute(contentPage.MEMBERSEARCH);
-	         %>
-	         <section class="recently-joined-section">
-	            <div class="container">
-	                <h2>Search members....</h2>
-	                <div class="row" >
-	                <%for(memberBean bean : memberList){ %>
-	                    <div class="col-md-6 col-lg-4">
-	                        <div class="joined-block">
-	                            <div class="joined-member-image">
-	                                <img src="memberCSS/images/join1.png" alt=""/>
-	                                <h4><%=bean.getFirstName() +" "+bean.getLastName() %></h4>
-	                            </div>
-	                            <div class="joined-member-info">
-	                                <h3><%=bean.getFirstName() +" "+bean.getLastName() %></h3>
-	                                <p>Age:<%=bean.getAge() %></p>
-	                                <p>City: <%=bean.getCityName() %></p>
-	                                <a href="javascrupt:;" class="btn">contact me</a>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <%} %>
-	                <!--     <div class="col-md-6 col-lg-4">
-	                        <div class="joined-block">
-	                            <div class="joined-member-image">
-	                                <img src="memberCSS/images/join2.png" alt=""/>
-	                                <h4>Loremm Ipsum</h4>
-	                            </div>
-	                            <div class="joined-member-info">
-	                                <h3>Lorem Ipsum</h3>
-	                                <p>Age:26</p>
-	                                <p>City:Vadodara</p>
-	                                <a href="javascrupt:;" class="btn">contact me</a>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div class="col-md-6 col-lg-4">
-	                        <div class="joined-block">
-	                            <div class="joined-member-image">
-	                                <img src="memberCSS/images/join3.png" alt=""/>
-	                                <h4>Loremm Ipsum</h4>
-	                            </div>
-	                            <div class="joined-member-info">
-	                                <h3>Lorem Ipsum</h3>
-	                                <p>Age:26</p>
-	                                <p>City:Vadodara</p>
-	                                <a href="javascrupt:;" class="btn">contact me</a>
-	                            </div>
-	                        </div>
-	                    </div> -->
-	                </div>
-	            </div>
-	        </section>
-	        <%} %>
-         <%}else{ %>
+  
          		<section class="our-services-section">
 	            <h1>Your partner search just got better with <span>Hamara nikah</span></h1>
 	            <div class="container">
@@ -628,8 +600,6 @@
 	            </div>
 	        </section>
          
-       <%} %>
-       
        
        
        
@@ -698,7 +668,14 @@
         </footer>
         
         
-		 
+<!-- 		 	<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+		 <script src="assets/js/bootstrap.min.js"></script> 
+
+		ace scripts
+		<script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script> -->
 		
 		
         <script type="text/javascript" src="memberCSS/js/jquery-3.3.1.min.js"></script>

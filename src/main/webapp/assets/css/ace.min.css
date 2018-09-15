@@ -9,6 +9,10 @@ html {
 	border-radius: 0
 }
 
+form{
+	width: 800px;
+	
+}
 .nav-list>li .submenu>li>a:hover,
 .nav-list>li>a,
 a:active,
@@ -25,7 +29,7 @@ body {
 	padding-bottom: 0;
 	font-family: 'Open Sans';
 	font-size: 13px;
-	color: #393939;
+	color: #000000;
 	line-height: 1.5
 }
 
@@ -2252,7 +2256,7 @@ pre.prettyprint {
 	width: 3px;
 	max-width: 3px;
 	overflow: hidden;
-	background-color: #629CC9
+	background-color: #5e1914
 }
 
 @media only screen and (min-width:992px) {
@@ -8856,13 +8860,13 @@ screen and (min--moz-device-pixel-ratio:1.2) and (max--moz-device-pixel-ratio:1.
 }
 
 .dropdown-menu.dropdown-close {
-	top: 92%;
+	top: 0%;
 	left: -5px
 }
 
 .dropdown-menu.dropdown-close.dropdown-menu-right {
 	left: auto;
-	right: -5px
+	/* right: -5px */
 }
 
 .dropdown-menu.dropdown-closer {
@@ -9436,7 +9440,7 @@ input[type=week],
 input[type=number],
 textarea {
 	border-radius: 0!important;
-	color: #858585;
+	color: #000000;
 	background-color: #FFF;
 	border: 1px solid #D5D5D5;
 	padding: 5px 4px 6px;
@@ -9516,7 +9520,7 @@ select {
 	border-radius: 0;
 	-webkit-box-shadow: none!important;
 	box-shadow: none!important;
-	color: #858585;
+	color: #000000;
 	background-color: #FFF;
 	border: 1px solid #D5D5D5
 }
@@ -14134,7 +14138,7 @@ tr.detail-row>td {
 
 .ace-thumbnails {
 	list-style: none;
-	margin: 0;
+	/* margin: 0; */
 	padding: 0
 }
 
