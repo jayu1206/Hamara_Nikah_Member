@@ -60,13 +60,13 @@
 		<div class="page-content">
 			<div class="page-header">
 
-				<div class="row">
-					<div class="col-xs-12">
+				<div class="row" style="width: 800px;" >
+					<!-- <div class="col-xs-12"> -->
 						<!-- PAGE CONTENT BEGINS -->
 						<div>
-							<div id="user-profile-1" class="user-profile row">
-								<div class="col-xs-12 col-sm-3 center">
-									<div>
+							<div id="user-profile-1" class="user-profile row" style="width: 200%;" >
+								<%-- <div class="col-xs-4 center">
+									<!-- <div> -->
 										<span class="profile-picture"> <img id="avatar"
 											class="editable img-responsive" alt="Alex's Avatar"
 											src="assets/images/avatars/profile-pic.jpg" />
@@ -74,8 +74,7 @@
 
 										<div class="space-4"></div>
 
-										<div
-											class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+										<div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
 											<div class="inline position-relative">
 											<%=familyStatus %>
 												<a href="#" class="user-title-label dropdown-toggle"
@@ -86,11 +85,11 @@
 
 											</div>
 										</div>
-									</div>
+									<!-- </div> -->
 									<div class="hr hr16 dotted"></div>
-								</div>
+								</div> --%>
 
-								<div class="col-xs-12 col-sm-9">
+								<div class="col-xs-8 col-sm-9">
 									<div class="space-12"></div>
 									<div class="profile-user-info profile-user-info-striped">
 										<div class="profile-info-row">
@@ -236,7 +235,7 @@
 
 
 						<!-- PAGE CONTENT ENDS -->
-					</div>
+					<!-- </div> -->
 					<!-- /.col -->
 				</div>
 				<!-- /.row -->

@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.softNice.nikah.beans.interestMemberBean;
 import com.softNice.nikah.beans.memberBean;
 import com.softNice.nikah.beans.memberDetailsBean;
 import com.softNice.nikah.beans.memberPlanBean;
@@ -645,6 +646,181 @@ public class memberImpl implements memberDAO {
 
 		return bean;
 	
+	}
+
+	@Override
+	public int insertInterested(interestMemberBean bean) {
+		// TODO Auto-generated method stub
+		Session session=null;
+		try {
+			session=HibernateFactory.openSession();
+			session.save(bean);
+			session.flush();
+			return 0;
+
+		} catch (Exception e) {
+			log.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
+			return 2;
+			  
+		} finally {
+			try {
+				HibernateFactory.close(session);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public boolean checkRequestedInterested(int toMemberId, int fromMemberId) {
+		// TODO Auto-generated method stub
+		
+				boolean flag= false;
+				long count = 0;
+				Session session = null;
+				try {
+					session = HibernateFactory.openSession();
+					Query query= null;
+					
+					query = session
+							.createQuery("select count(*) from interestMemberBean where  fromMemberId=:fromMemberId and toMemberId=:toMemberId and status=1 ");
+						
+					query.setParameter("fromMemberId", fromMemberId);
+					query.setParameter("toMemberId", toMemberId);
+					count = (Long) query.uniqueResult();
+					session.flush();
+					
+					if(count>0){
+						flag = true;
+					}
+				
+
+				} catch (Exception e) {
+					log.log(Level.SEVERE, e.getMessage());
+					e.printStackTrace();
+					flag = false;
+					  
+				} finally {
+					try {
+						HibernateFactory.close(session);
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+
+				return flag;
+	}
+
+	@Override
+	public boolean checkMemberOtherDetails(int memberId) {
+		// TODO Auto-generated method stub
+		boolean flag= false;
+		long count = 0;
+		Session session = null;
+		try {
+			session = HibernateFactory.openSession();
+			Query query= null;
+			
+			query = session
+					.createQuery("select count(*) from memberDetailsBean where  memberId=:memberId  ");
+				
+			query.setParameter("memberId", memberId);
+			count = (Long) query.uniqueResult();
+			session.flush();
+			
+			if(count>0){
+				flag = true;
+			}
+		
+
+		} catch (Exception e) {
+			log.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
+			flag = false;
+			  
+		} finally {
+			try {
+				HibernateFactory.close(session);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return flag;
+	}
+
+	@Override
+	public int updateMemberDetails(memberDetailsBean bean) {
+		// TODO Auto-generated method stub
+		Session session=null;
+		try {
+			session=HibernateFactory.openSession();
+			session.update(bean);
+			session.flush();
+			return 0;
+
+		} catch (Exception e) {
+			log.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
+			return 2;
+			  
+		} finally {
+			try {
+				HibernateFactory.close(session);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public ArrayList<interestMemberBean> getAllInterestedList(int memberId) {
+		// TODO Auto-generated method stub
+		ArrayList<interestMemberBean> interestedList=new ArrayList<interestMemberBean>();
+		ArrayList<interestMemberBean> interestedListFinal=new ArrayList<interestMemberBean>();
+		Session session = null;
+		try {
+			
+			session = HibernateFactory.openSession();
+			Query query= null;
+			query = session.createQuery(" from interestMemberBean where  fromMemberId=:fromMemberId ");
+			query.setParameter("fromMemberId", memberId);
+			
+			if(query.list().get(0)!=null){
+				interestedList = (ArrayList<interestMemberBean>) query.list();
+				
+				for(interestMemberBean intBean : interestedList){
+					query = session.createQuery(" from memberBean where  id=:id ");
+					query.setParameter("id", intBean.getToMemberId());
+					memberBean memberbean= (memberBean)query.list().get(0);
+					intBean.setMember(memberbean);
+					interestedListFinal.add(intBean);
+				}
+				
+				
+			}
+			
+			
+
+		} catch (Exception e) {
+			log.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
+			  
+		} finally {
+			try {
+				HibernateFactory.close(session);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return interestedListFinal;
 	}
 
 }

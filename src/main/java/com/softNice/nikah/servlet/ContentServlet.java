@@ -209,11 +209,6 @@ public class ContentServlet extends HttpServlet {
 				
 			}
 			
-			if(request.getParameter("key").equals("searchMember")){
-				request.setAttribute(contentPage.CONTENT_PAGE, "/member/searchMember.jsp");
-				
-			}
-
 			if(request.getParameter("key").equals("order")){
 				memberMaintenance.getInstance().getAllMemberPlan(request);
 				memberMaintenance.getInstance().getAllActiveMembers(request);
@@ -269,9 +264,9 @@ public class ContentServlet extends HttpServlet {
 		if(key!=null){
 			if(request.getParameter("key").equals("searchMember")){
 				
-				adminMaintenance.getInstance().seachMember(request);
-				request.setAttribute(contentPage.CONTENT_PAGE, "/member/searchMember.jsp");
-				rd=request.getRequestDispatcher("/index.jsp");  
+				memberMaintenance.getInstance().seachMember(request);
+				//request.setAttribute(contentPage.CONTENT_PAGE, "/member/searchMember.jsp");
+				rd=request.getRequestDispatcher("/advanceSearch.jsp");  
 				rd.forward(request, response); 
 				
 			}

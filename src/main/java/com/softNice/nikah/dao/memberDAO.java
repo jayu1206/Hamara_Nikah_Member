@@ -2,6 +2,7 @@ package com.softNice.nikah.dao;
 
 import java.util.ArrayList;
 
+import com.softNice.nikah.beans.interestMemberBean;
 import com.softNice.nikah.beans.memberBean;
 import com.softNice.nikah.beans.memberDetailsBean;
 import com.softNice.nikah.beans.memberPlanBean;
@@ -54,5 +55,15 @@ public interface memberDAO {
 	public abstract int updateOrder(orderBean bean);
 
 	public abstract memberBean checkPartnerIdIsAvailable(String partnerMemberId);
+
+	public abstract int insertInterested(interestMemberBean bean);
+
+	public abstract boolean checkRequestedInterested(int toMemberId,int fromMemberId);
+
+	public abstract boolean checkMemberOtherDetails(int memberId);
+
+	public abstract int updateMemberDetails(memberDetailsBean details);
+
+	public abstract ArrayList<interestMemberBean> getAllInterestedList(int memberId);
 
 }

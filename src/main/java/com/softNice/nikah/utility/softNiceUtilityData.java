@@ -152,5 +152,14 @@ public class softNiceUtilityData {
 		
 		return dt;
 	}
+	
+	
+	public static String sendRequestInterested(int toMemberId,int fromMemberId){
+		
+		
+		 String str=  memberMaintenance.getInstance().sendRequestInterested(toMemberId,fromMemberId);
+		
+		return str;
+	}
 
 }

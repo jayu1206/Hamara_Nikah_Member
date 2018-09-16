@@ -56,10 +56,12 @@ for(dashboard daBean : dashboardList){
 
 
 %>
-
-<div class="main-content">
+  		
+  		
+  		
+	    <div class="main-content" >
 				<div class="main-content-inner">
-					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+					<div class="breadcrumbs ace-save-state" id="breadcrumbs"  style="width: 774px;" >
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
@@ -68,20 +70,13 @@ for(dashboard daBean : dashboardList){
 							<li class="active">Dashboard</li>
 						</ul><!-- /.breadcrumb -->
 
-						<div class="nav-search" id="nav-search">
-							<form class="form-search">
-								<span class="input-icon">
-									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-									<i class="ace-icon fa fa-search nav-search-icon"></i>
-								</span>
-							</form>
-						</div><!-- /.nav-search -->
+						
 					</div>
 
 					<div class="page-content">
 					
 
-						<div class="page-header">
+					<!-- 	<div class="page-header">
 							<h1>
 								Dashboard
 								<small>
@@ -89,28 +84,19 @@ for(dashboard daBean : dashboardList){
 									overview &amp; stats
 								</small>
 							</h1>
-						</div><!-- /.page-header -->
+						</div> --><!-- /.page-header -->
 
-						<div class="row">
+						<div class="row" >
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-							
-
-								<div class="row">
-									<div class="space-6"></div>
- 
-					
-									<div class="vspace-12-sm"></div>
-
-						
-								</div><!-- /.row -->
+<!-- 
 								
-									<h4 class="header blue bolder smaller"> &nbsp;</h4>
-									
+									<h4 class="header blue bolder smaller" > &nbsp;</h4>
+									 -->
 <%if(list.size()>0){  %>
-					<div class="row">
+					<div class="row"  style="width: 800px;" >
 				
-						<div class="col-xs-4 col-sm-2 pricing-span-header">
+						<div class="col-xs-12 col-sm-2 pricing-span-header">
 										<div class="widget-box transparent">
 											<div class="widget-header">
 												<h5 class="widget-title bigger lighter">Package Name</h5>
@@ -260,18 +246,11 @@ for(dashboard daBean : dashboardList){
 							
 							
 							<%} %>
-							
-							
-							
-									
-									
-									
-							
-							
-							
+
 								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
 						</div><!-- /.row -->
 					</div><!-- /.page-content -->
 				</div>
 			</div><!-- /.main-content -->
+	   

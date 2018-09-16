@@ -79,7 +79,7 @@
         <set name="details" table="memberdetails"
 			inverse="true" lazy="false" fetch="select">
 			<key>
-				<column name="id" />
+				<column name="memberId" />
 			</key>
 			<one-to-many
 				class="com.softNice.nikah.beans.memberDetailsBean" />

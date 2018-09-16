@@ -1,4 +1,5 @@
 
+<%@page import="com.softNice.nikah.beans.memberDetailsBean"%>
 <%@page import="com.softNice.nikah.utility.EncrypitDecrypit"%>
 <%@page import="com.softNice.nikah.beans.memberBean"%>
 <%@page import="com.softNice.nikah.beans.masterBean"%>
@@ -28,6 +29,7 @@
 						String confPsw="";
 						String familyStatus="";
 						int culture = 0;
+						int motherTounge= 0;
 						int height = 0;
 						int weight = 0;
 						int built = 0;
@@ -40,7 +42,7 @@
 						int profession = 0;
 						int income = 0;
 						String visa = "";
-						
+						int otherDetailsid=0;
 						
 							boolean modifyFlag=false;
 							String key="addMember";
@@ -60,6 +62,33 @@
 									 phno=bean.getPhno()==null?"":bean.getPhno();
 									 psw=EncrypitDecrypit.decrypt(bean.getPassword(), "password"); 
 									 confPsw=psw;
+									 
+									 if(bean.getDetails().size()>0){
+										 ArrayList<memberDetailsBean> list = new ArrayList<memberDetailsBean>(bean.getDetails());
+												for(memberDetailsBean detailsBean : list){
+													familyStatus=detailsBean.getFamilyStatus();
+													culture = detailsBean.getCulture();
+													motherTounge = detailsBean.getMotherTounge();
+													height = detailsBean.getHeight();
+													weight = detailsBean.getWeight();
+													built = detailsBean.getBuilt();
+													complexion = detailsBean.getComplexion();
+													diet= detailsBean.getDiet();
+													drink = detailsBean.getDrink() ;
+													smoke = detailsBean.getSmoke();
+													about = detailsBean.getAbout();
+													education = detailsBean.getEducation();
+													profession = detailsBean.getProfession();
+													income = detailsBean.getIncome();
+													visa = detailsBean.getVisaStatus();
+													otherDetailsid = detailsBean.getId();
+													
+												}
+										 
+										 
+									 }
+									 
+									 
 								}
 								if(request.getAttribute(contentPage.MODIFYOBJ)!=null){
 									bean = (memberBean)request.getAttribute(contentPage.MODIFYOBJ);
@@ -107,7 +136,7 @@
 							
 						</div><!-- /.page-header -->
 
-						<div class="row">
+						<div class="row" style="width: 800px;" >
 							
 							<div class="col-md-12">
 								<!-- PAGE CONTENT BEGINS -->
@@ -119,6 +148,7 @@
 											<form class="form-horizontal" id="addUser" name="addUser" action="memberServlet?key=<%=key %>" enctype="multipart/form-data" method="post">
 											
 													<input type="hidden" id="txtId" name="txtId" value="<%=bean.getId() %>" />
+													<input type="hidden" id="txtOtherDetailId" name="txtOtherDetailId" value="<%=otherDetailsid %>" />
 											
 												<div class="tabbable">
 													<ul class="nav nav-tabs padding-16">
@@ -179,6 +209,7 @@
 														 
 													    familyStatus=request.getParameter("rblFamilyStatus")==null?"":request.getParameter("rblFamilyStatus");
 														culture = request.getParameter("culture")!=null?Integer.parseInt(request.getParameter("culture")):0;
+														motherTounge = request.getParameter("motherTounge")!=null?Integer.parseInt(request.getParameter("motherTounge")):0;
 														height = request.getParameter("height")!=null?Integer.parseInt(request.getParameter("height")):0;
 														weight =request.getParameter("weight")!=null?Integer.parseInt(request.getParameter("weight")):0;
 														built = request.getParameter("built")!=null?Integer.parseInt(request.getParameter("built")):0;
@@ -392,7 +423,7 @@
 
 																<div class="vspace-12-sm"></div>
 
-																<div class="col-xs-12 col-sm-8">
+																<div class="col-xs-12 col-sm-12">
 																	
 																	<div class="form-group">
 																		
@@ -463,6 +494,44 @@
 																</div>
 																</div>
 													</div>
+													
+													
+													
+													<%
+															list=null;
+															if(request.getSession().getAttribute(contentPage.MotherTounge)!=null){
+																list = (ArrayList<masterBean>) request.getSession().getAttribute(contentPage.MotherTounge);
+															}
+													%>
+													<h4 class="header blue bolder smaller">Mother Tounge</h4>
+													<div class="row">
+															
+																<div class="vspace-12-sm"></div>
+
+																<div class="col-xs-12 col-sm-8">
+																	
+																<div class="form-group">
+																
+
+																	<div class="col-sm-9">
+																		<select class="col-sm-7" id="motherTounge" name="motherTounge"  >
+																		<option value="0">Select</option>
+																		<%for(masterBean mstbean : list){
+																			if(motherTounge == mstbean.getId() ){
+																			%>
+																				<option value="<%=mstbean.getId() %>" selected="selected" ><%=mstbean.getValue() %></option>
+																			<%}else{ %>
+																				<option value="<%=mstbean.getId() %>"  ><%=mstbean.getValue() %></option>
+																		<% }}%>
+																		
+																		</select>
+																	</div>
+																</div>
+																</div>
+													</div>
+													
+													
+													
 													
 													<%
 															list=null;
@@ -698,7 +767,7 @@
 																
 
 																	<div class="col-sm-9">
-																		<textarea rows="5" cols="100" id ="about" name="about"><%=about %> </textarea>
+																		<textarea rows="5" cols="60" id ="about" name="about"><%=about %> </textarea>
 																		
 																	</div>
 																</div>
@@ -822,7 +891,7 @@
 																		<div class="col-sm-12">
 																		
 																		<%if(visa.equals("Citizenship")){ %>
-																			<input name="visa" id="Citizenship" type="radio" class="ace" value="Citizenship"/>
+																			<input name="visa" checked="checked" id="Citizenship" type="radio" class="ace" value="Citizenship"/>
 																		<%}else{ %>
 																			<input name="visa" id="Citizenship" type="radio" class="ace" value="Citizenship"/>
 																		<%} %>
@@ -831,7 +900,7 @@
 																			
 																			
 																		<%if(visa.equals("Legal")){ %>
-																			<input name="visa" id="Legal" type="radio" class="ace" value="Legal"/>
+																			<input name="visa" checked="checked" id="Legal" type="radio" class="ace" value="Legal"/>
 																		<%}else{ %>
 																			<input name="visa" id="Legal" type="radio" class="ace" value="Legal"/>
 																		<%} %>
@@ -840,7 +909,7 @@
 																			
 																			
 																		<%if(visa.equals("Work")){ %>
-																			<input name="visa" id="Work" type="radio" class="ace" value="Work"/>
+																			<input name="visa"  checked="checked" id="Work" type="radio" class="ace" value="Work"/>
 																		<%}else{ %>
 																			<input name="visa" id="Work" type="radio" class="ace" value="Work"/>
 																		<%} %>
@@ -849,7 +918,7 @@
 																			
 																			
 																		<%if(visa.equals("Bussiness")){ %>
-																			<input name="visa" id="Bussiness" type="radio" class="ace" value="Bussiness"/>
+																			<input name="visa" checked="checked" id="Bussiness" type="radio" class="ace" value="Bussiness"/>
 																		<%}else{ %>
 																			<input name="visa" id="Bussiness" type="radio" class="ace" value="Bussiness"/>
 																		<%} %>
@@ -858,7 +927,7 @@
 																			
 																			
 																		<%if(visa.equals("Student")){ %>
-																			<input name="visa" id="Student" type="radio" class="ace" value="Student"/>
+																			<input name="visa" checked="checked" id="Student" type="radio" class="ace" value="Student"/>
 																		<%}else{ %>
 																			<input name="visa" id="Student" type="radio" class="ace" value="Student"/>
 																		<%} %>
@@ -867,7 +936,7 @@
 																			
 																			
 																		<%if(visa.equals("Tourist")){ %>
-																			<input name="visa" id="Tourist" type="radio" class="ace" value="Tourist"/>
+																			<input name="visa" checked="checked" id="Tourist" type="radio" class="ace" value="Tourist"/>
 																		<%}else{ %>
 																			<input name="visa" id="Tourist" type="radio" class="ace" value="Tourist"/>
 																		<%} %>
