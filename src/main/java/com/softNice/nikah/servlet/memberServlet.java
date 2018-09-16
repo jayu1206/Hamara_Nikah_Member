@@ -23,11 +23,14 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.softNice.nikah.beans.generalSettingBean;
 import com.softNice.nikah.beans.memberBean;
+import com.softNice.nikah.beans.memberDetailsBean;
 import com.softNice.nikah.beans.memberStoryBean;
 import com.softNice.nikah.beans.permissionBean;
 import com.softNice.nikah.beans.roleBean;
 import com.softNice.nikah.constent.ErrorMsg;
 import com.softNice.nikah.constent.contentPage;
+import com.softNice.nikah.dao.memberDAO;
+import com.softNice.nikah.impl.memberImpl;
 import com.softNice.nikah.maintenance.adminMaintenance;
 import com.softNice.nikah.maintenance.memberMaintenance;
 import com.softNice.nikah.maintenance.roleMaintenance;
@@ -270,6 +273,7 @@ public class memberServlet extends HttpServlet {
 			}
 			
 			if(request.getParameter("key").equals("addMember")){
+				
 				adminMaintenance.getInstance().getAllCountry(request);
 				ErrorMsg obj=(ErrorMsg) memberMaintenance.getInstance().addMemberOtherDetails(request);
 				request.setAttribute("error", obj);

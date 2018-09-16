@@ -116,7 +116,7 @@
 									<div id="user-profile-3" class="user-profile row">
 										<div class="col-sm-offset-1 col-sm-10">
 
-											<form class="form-horizontal" id="addUser" name="addUser" action="memberServlet?key=<%=key %>" method="post">
+											<form class="form-horizontal" id="addUser" name="addUser" action="memberServlet?key=<%=key %>" enctype="multipart/form-data" method="post">
 											
 													<input type="hidden" id="txtId" name="txtId" value="<%=bean.getId() %>" />
 											
@@ -319,6 +319,12 @@
 																	<select class="col-sm-3" id="city" name="city" >
 																	<option value="0">Select</option>
 																	</select>
+																</div>
+															</div>
+															<div class="form-group">
+ 															<label class="col-sm-3 control-label no-padding-right" for="form-field-comment">Profile Photo</label>
+																<div class="col-sm-9">
+																	 <input type="file" name="profileImg" id="profileImg" />
 																</div>
 															</div>
 
