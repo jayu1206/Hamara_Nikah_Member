@@ -76,6 +76,11 @@
             <column name="MaritalStatus"  />
         </property>
         
+        <property  name="imgUrl" type="java.lang.String">
+            <column name="imgUrl"  />
+        </property>
+        
+        
         <set name="details" table="memberdetails"
 			inverse="true" lazy="false" fetch="select">
 			<key>

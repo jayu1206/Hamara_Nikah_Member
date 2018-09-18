@@ -66,22 +66,38 @@ img {
 							map = (HashMap) request.getSession().getAttribute(contentPage.MAPOBJ);
 						}		
 							 */
+							
 							 memberBean bean=new memberBean();
 							 if(request.getSession().getAttribute(contentPage.USERSOBJ)!=null){
 								 bean = (memberBean)request.getSession().getAttribute(contentPage.USERSOBJ);
 							 }
+							 String memberId = bean.getMemberId();
+							 String fileName = null;
+							 if (bean.getImgUrl() != null){
+								 String path[] = bean.getImgUrl().toString().split("profile_photos");
+									String finalPath = path[1];															
+									fileName = finalPath.substring(finalPath.lastIndexOf("\\")+1);
+							 }
+							
 	
 				%>
 				
 				<script type="text/javascript">
 					try{ace.settings.loadState('sidebar')}catch(e){}
 				</script>
-
+				
 					 	<!-- <span class="profile-picture">  --> 
 					 	<div class="row">
    									<div class="small-12 medium-2 large-2 columns">
 									 <div class="circle" style="margin-top: -4%;margin-left: 2%;">
-									<img id="avatar" name="avatar" class="profile-pic" alt="Alex's Avatar" src="assets/images/avatars/profile-pic.jpg" />
+									<!-- <img id="avatar" name="avatar" class="profile-pic" alt="Alex's Avatar" src="assets/images/avatars/profile-pic.jpg" /> -->
+									 <%if (bean.getImgUrl() != null){ %>
+											<img id="avatar" name="avatar" class="profile-pic" alt="Alex's Avatar" 
+												src="<%="webapp/profile_photos/"+fileName %>" /> 
+									<%}else{ %>
+											<img id="avatar" name="avatar" class="profile-pic" alt="Alex's Avatar" 
+											src="assets/images/avatars/profile-pic.jpg" />
+									<%} %> 
 									<div class="p-image">
 								       <i class="fa fa-camera upload-button"></i> 
 								        <input class="file-upload" type="file" id="profileImg"  name="profileImg" accept="image/*"/>
@@ -171,20 +187,49 @@ img {
 
 $(document).ready(function() {
 
-    
+   
     var readURL = function(input) {
         if (input.files && input.files[0]) {
-            var reader = new FileReader();
+            var reader = new FileReader(input.files[0]);
 
             reader.onload = function (e) {
                 $('.profile-pic').attr('src', e.target.result);
             }
-    			
+    	
             reader.readAsDataURL(input.files[0]);
+            uploadImage(input.files[0]);
         }
         
-        alert(document.getElementById("profileImg").toString());
+        //alert(document.getElementById("profileImg").toString());
     }
+
+    function uploadImage (imageData){
+
+		var file_data = imageData;   // Getting the properties of file from file field
+		var form_data = new FormData();                  // Creating object of FormData class
+		form_data.append("file", file_data);              // Appending parameter named file with properties of file_field to form_data
+    
+    	var url = "memberServlet?key=profileUpload&memberId=<%=memberId%>";
+    	
+    	  $.ajax({
+    	    url: url,
+    	    enctype: 'multipart/form-data',
+    	    type: 'POST',
+    	    data: form_data,
+    	    async: false,
+    	    cache: false,
+    	    contentType: false,
+    	    processData: false,
+    	    success: function (returndata) {
+    	    	window.location.reload();
+    	    },
+    	    error: function (e) {
+    	    	window.location.reload();
+        	}
+    	  });
+ 
+     }
+
     
 
     $(".file-upload").on('change', function(){

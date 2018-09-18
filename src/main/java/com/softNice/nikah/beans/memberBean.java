@@ -27,7 +27,15 @@ public class memberBean {
 	private String planName;
 	private int age;
 	private byte[] image;
+	private String imgUrl;
+
 	
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 	public byte[] getImage() {
 		return image;
 	}

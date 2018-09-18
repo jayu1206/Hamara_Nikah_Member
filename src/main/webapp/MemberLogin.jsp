@@ -66,7 +66,7 @@ window.history.forward(1);
     	
     } */
     
-     request.getSession().setAttribute(contentPage.MASTERMAPOBJ, getServletContext().getAttribute(contentPage.MASTERMAPOBJ));
+     /*  request.getSession().setAttribute(contentPage.MASTERMAPOBJ, getServletContext().getAttribute(contentPage.MASTERMAPOBJ));
      HashMap<Integer, String> map2 = new HashMap<Integer, String>();
 		if(request.getSession().getAttribute(contentPage.MASTERMAPOBJ)!=null){
 			map2 = (HashMap<Integer, String>)  request.getSession().getAttribute(contentPage.MASTERMAPOBJ);
@@ -74,7 +74,7 @@ window.history.forward(1);
 				adminMaintenance.getInstance().getMasterBaseOnId((int)m.getKey(),m.getValue().toString(),request);
 				
 			}
-		}
+		} */ 
 		
 		
     			adminMaintenance.getInstance().getAllCountry(request);
@@ -422,22 +422,22 @@ window.history.forward(1);
                                 <option>30</option>
                             </select>
                         </div>
-                        <%
+                       <%--  <%
 																
 								ArrayList<masterBean> list = null;
 									if(request.getSession().getAttribute(contentPage.MotherTounge)!=null){
 										list = (ArrayList<masterBean>) request.getSession().getAttribute(contentPage.MotherTounge);
 									}
 															
-							%>
+							%> --%>
                         <div class="form-detail">
                             <label id="mother-tounge">Mother Tounge</label>
-                            <select>
+                        <%--     <select>
                             	<option value="0">Select</option>
                                 <%for(masterBean mstbean : list){%>
 									<option value="<%=mstbean.getId() %>"  ><%=mstbean.getValue() %></option>
 							<% }%>
-                            </select>
+                            </select> --%>
                         </div>
                         <div class="form-detail">
                             <label id="sect">Country</label>
@@ -512,10 +512,11 @@ window.history.forward(1);
 							String finalPath = path[1];															
 							String fileName = finalPath.substring(finalPath.lastIndexOf("\\")+1);
 			        %>
+			        
 					<div class="success-story-block">
 	                        <div class="story-image">
-	                           <%--  <img src="<%="webapp/temp/"+fileName %>" alt=""/> --%>
-	                             <img src=<%="http://localhost:8085/SoftNice_Hamara_Nikah/webapp/temp/"+fileName%> alt="Image not available"/>
+	                             <img src="<%="file:/"+storyBean.getImgUrl() %>" alt=""/>
+	                            <%--  <img src=<%="http://localhost:8085/SoftNice_Hamara_Nikah/webapp/temp/"+fileName%> alt="Image not available"/> --%>
 	                            
 	                        </div>
 	                        <div class="success-story-content">

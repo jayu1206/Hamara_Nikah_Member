@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -397,7 +400,68 @@ public class memberServlet extends HttpServlet {
 				
 			}
 			
-			
+			if(request.getParameter("key").equals("profileUpload")){
+				
+					
+				String memberId = request.getParameter("memberId");
+				memberDAO dao=new memberImpl();
+				memberBean memberbean=dao.getMemberBaseOnMemberId(memberId);
+				ServletContext servletContext = this.getServletConfig().getServletContext();
+				 if(ServletFileUpload.isMultipartContent(request)){
+			            try {
+			                List<FileItem> multiparts = new ServletFileUpload(
+			                                         new DiskFileItemFactory()).parseRequest(request);
+			              
+			                for(FileItem item : multiparts){
+			                    if(!item.isFormField()){
+			                    	if(new File(item.getName()).getName().length()>0){
+			                    		String name = new File(item.getName()).getName();
+			                    		File filename = new File(name);
+			                    		//String []str= name.split(".");
+			                    		File rename = new File(memberId+".jpg");
+			                    		filename.renameTo(rename);
+			                    		 
+			                    		final String IMAGE_RESOURCE_PATH = "/webapp/profile_photos";
+			                    		
+			                    		String directoryPath = 
+			                    		        getServletContext().getRealPath(IMAGE_RESOURCE_PATH);
+			                    		
+			                    		File directory = new File(directoryPath);
+
+			                    		if(!directory.exists()) {
+			                    		    directory.mkdirs();
+			                    		}
+			                    		
+										 String withFile = directoryPath  + File.separator+ rename;
+										 File uploadedFile = new File(withFile);								 
+										
+										 if(!uploadedFile.exists())
+											 uploadedFile.createNewFile();
+										 item.write(uploadedFile);
+										 memberbean.setImgUrl(withFile);
+			                    	}
+			                        
+									 
+			                    }
+			                }
+			                int flag = dao.updateMember(memberbean);
+			                if(flag!=0){
+			                	memberBean bean = memberMaintenance.getInstance().authentication(request);
+			                	request.getSession().setAttribute(contentPage.USERSOBJ,bean);
+			    				request.getSession().setAttribute(contentPage.MEMBERS,bean);
+			                	rd=request.getRequestDispatcher("/member/memberDashboard.jsp");
+							}else{
+								rd=request.getRequestDispatcher("/member/memberDashboard.jsp");
+							}
+			                rd.forward(request, response); 
+
+			            } catch (Exception ex) {
+			            	ex.printStackTrace();
+			            }          
+			         
+			        }
+				
+			}
 			
 			
 		}else{
